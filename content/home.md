@@ -7,9 +7,9 @@ description: "Phil Picton is a front end developer from Devon, UK. "
 
 I'm Phil, and I'm a software engineer from [Devon](https://www.visitdevon.co.uk/), UK. Pronouns: he/him.
 
-I work with [HTML](https://www.w3schools.com/html/html_intro.asp), [JavaScript](https://javascript.info/), [TypeScript](https://www.typescriptlang.org/), [CSS](https://en.wikipedia.org/wiki/CSS), and front end frameworks like [Vue.JS](https://vuejs.org/), and [Nuxt](https://nuxt.com/).
+I have a wide skill set and a wealth of experience with various tech, mainly focussed around the web and e-commerce.
 
-I'm a fan of the [JamStack](https://jamstack.org/). I dabble in [Serverless development](https://www.cloudflare.com/learning/serverless/what-is-serverless/) and JavaScript runtimes such as [Node.JS](https://nodejs.org/en/about/) or [Bun](https://bun.sh/). I'm experienced with a broad range of web technologies, as well as other forms of software development. I'm always eager to learn more.
+I specialise in front end web development and work with [HTML](https://www.w3schools.com/html/html_intro.asp), [JavaScript](https://javascript.info/), [TypeScript](https://www.typescriptlang.org/), [CSS](https://en.wikipedia.org/wiki/CSS), and front end frameworks like [Vue.JS](https://vuejs.org/), and [Nuxt](https://nuxt.com/). My specialism extends to things like [web animation](https://gsap.com), [design systems](https://bradfrost.com/blog/post/atomic-web-design/), [user experience](https://www.bbc.co.uk/supplying/working-with-us/user-experience), developer tooling and [data visualisation](https://www.bbc.co.uk/supplying/working-with-us/user-experience).
 
 I love to build beautiful, useable experiences with the latest web technologies. I'm a [user advocate](https://en.wikipedia.org/wiki/User_advocacy), and I care about [accessibility](https://en.wikipedia.org/wiki/Web_accessibility) and [performance](https://developer.mozilla.org/en-US/docs/Web/Performance).
 

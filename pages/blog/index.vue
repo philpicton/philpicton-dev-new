@@ -61,9 +61,9 @@ function goToPage(page: number) {
       <button
         :disabled="currentPage === 1"
         @click="goToPage(currentPage - 1)"
-        class="px-3 py-1 border rounded disabled:opacity-50 flex align-center justify-center"
+        class="px-2 py-1 border rounded disabled:opacity-50 flex items-center justify-center"
       >
-        <Icon name="formkit:stepback" size="24" />
+        <Icon name="formkit:stepback" size="24" class="block" />
       </button>
       <button
         v-for="page in totalPages"
@@ -80,7 +80,7 @@ function goToPage(page: number) {
       <button
         :disabled="currentPage === totalPages"
         @click="goToPage(currentPage + 1)"
-        class="px-3 py-1 border rounded disabled:opacity-50 flex align-center justify-center"
+        class="px-2 py-1 border rounded disabled:opacity-50 flex items-center justify-center"
       >
         <Icon name="formkit:stepforward" size="24" />
       </button>

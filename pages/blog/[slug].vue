@@ -3,6 +3,10 @@ const route = useRoute();
 const { data: post } = await useAsyncData(route.path, () => {
   return queryCollection("blogPost").path(route.path).first();
 });
+useSeoMeta({
+  title: `${post?.value?.title || ""} - Phil Picton 💀`,
+  description: `${post?.value?.description || "Read this blog post by Phil Picton."}`,
+});
 </script>
 
 <template>

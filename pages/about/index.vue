@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const animation = ref(null);
+import type { HomeAnimation } from "#components";
+const animation = ref<InstanceType<typeof HomeAnimation> | null>(null);
 const nuxtApp = useNuxtApp();
 
 onMounted(() => {
@@ -7,13 +8,15 @@ onMounted(() => {
 });
 
 const triggerAnimation = () => {
-  if (animation.value && animation.value.animate()) {
+  if (animation.value?.animate) {
     animation.value.animate();
   }
 };
+
 nuxtApp.hook("page:transition:finish", () => {
   triggerAnimation();
 });
+
 const { data: about } = await useAsyncData(() =>
   queryCollection("pages").path("/about").first(),
 );

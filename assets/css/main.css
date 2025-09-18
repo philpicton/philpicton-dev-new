@@ -8,13 +8,11 @@
 :root {
   --laser-color: #008f4f; /* default for light mode */
   --glow-opacity: 0.08;
-  --bg-gradient: linear-gradient(135deg, #f0f0f0, #e0e0e0);
 }
 
 [data-theme="dark"] {
   --laser-color: #00ff7f; /* neon green for dark mode */
   --glow-opacity: 0.15;
-  --bg-gradient: linear-gradient(135deg, #000000, #111111);
 }
 
 .wave {

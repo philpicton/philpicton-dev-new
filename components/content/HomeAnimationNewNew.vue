@@ -6,20 +6,37 @@
       height="240"
       viewBox="0 0 317.49999 63.5"
       xmlns="http://www.w3.org/2000/svg"
-      alt="The words hello world are animated onto the page, looking like they were drawn by a green laser."
+      alt="The words hello world are animated onto the page, looking like they were drawn by a green laser. Then they fall into the floor. Its a tricky animation to show off my skills."
     >
       <defs>
-        <filter id="neonBlur" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b1" />
+        <filter id="neonBlur" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="4"
+            result="innerGlow"
+          />
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="6"
+            result="outerGlow"
+          />
           <feMerge>
-            <feMergeNode in="b1" />
+            <feMergeNode in="innerGlow" />
+            <feMergeNode in="glowColor" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
 
-      <!-- glowing background strokes (faint neon) -->
+      <defs>
+        <clipPath id="text-clip">
+          <!-- only allow drawing above y=63 -->
+          <rect x="0" y="0" width="100%" height="63" />
+        </clipPath>
+      </defs>
+
       <g>
+        <!-- glowing paths -->
         <path
           v-for="(p, i) in pathsData"
           :key="i"
@@ -27,14 +44,15 @@
           class="glow"
           fill="none"
           stroke="#00ff7f"
-          stroke-width="8"
+          stroke-width="6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
           opacity="0.15"
           filter="url(#neonBlur)"
         />
       </g>
-
       <!-- laser stroke paths -->
-      <g>
+      <g id="letters-group" clip-path="url(#text-clip)">
         <path
           v-for="(p, i) in pathsData"
           :key="i"
@@ -45,9 +63,28 @@
           stroke-width="1"
         />
       </g>
-
       <!-- laser tip -->
-      <circle ref="laserTip" r="4" fill="#00ff7f" filter="url(#neonBlur)" />
+      <circle ref="laserTip" r="4" fill="#00ff7f" id="laser-tip" />
+      <!-- baseline -->
+      <line
+        opacity="0"
+        id="baseline"
+        stroke="var(--laser-color)"
+        stroke-width="2"
+        x1="0"
+        y1="63"
+        x2="317.5"
+        y2="63"
+      />
+      <!-- glowing flash -->
+      <circle
+        id="flash-circle"
+        cx="158.75"
+        cy="63"
+        r="6"
+        fill="var(--laser-color)"
+        opacity="0"
+      />
     </svg>
   </div>
 </template>
@@ -75,7 +112,6 @@ const pathsData = [
   "m 306.09579,13.356392 3.95111,0.493889 v 34.736843 h -3.45722 l -0.37629,-3.269073 q -1.3876,1.975555 -3.19852,2.892777 -1.78741,0.917222 -3.83352,0.917222 -3.22203,0 -5.31518,-1.622778 -2.09315,-1.622777 -3.10445,-4.515554 -1.01129,-2.916296 -1.01129,-6.749813 0,-3.715925 1.15241,-6.632221 1.1524,-2.939814 3.31611,-4.609628 2.18722,-1.693333 5.24462,-1.693333 4.11574,0 6.63222,2.916296 z m -5.5974,13.12333 q -3.10445,0 -4.77426,2.422407 -1.66981,2.422407 -1.66981,7.337776 0,9.689627 5.95018,9.689627 2.09315,0 3.59833,-1.175926 1.50519,-1.199444 2.49296,-2.728147 V 29.654721 q -1.01129,-1.505184 -2.44592,-2.328332 -1.43463,-0.846667 -3.15148,-0.846667 z",
 ];
 
-// Expose a function to play the animation
 function animate() {
   const paths = svgEl.value.querySelectorAll(".stroke");
   const glows = svgEl.value.querySelectorAll(".glow");
@@ -93,7 +129,6 @@ function animate() {
   // Animate each path sequentially
   paths.forEach((path, index) => {
     const glow = glows[index];
-    const length = path.getTotalLength();
     tl.to(
       path,
       {
@@ -145,7 +180,7 @@ function animate() {
     "-=0.3",
   );
 
-  // Shrink laser tip to zero at the end
+  // Shrink laser tip to zero
   tl.to(laserTip.value, {
     duration: 0.4,
     scale: 0,
@@ -154,7 +189,7 @@ function animate() {
     ease: "power2.in",
   });
 
-  // subtle glow pulse at the end
+  // glow pulse
   tl.to(
     svgEl.value.querySelectorAll(".glow"),
     {
@@ -166,7 +201,7 @@ function animate() {
     },
     "+=0.2",
   );
-
+  // emoji hand wave
   tl.add(() => {
     const waveEl = document.querySelector("#wave-emoji");
     if (waveEl) {
@@ -185,6 +220,61 @@ function animate() {
       );
     }
   });
+  // letters drop down
+  tl.to(paths, {
+    y: 60,
+    duration: 0.6,
+    ease: "power2.in",
+    stagger: 0.05,
+    delay: 2,
+  })
+    // baseline fade in
+    .to(
+      "#baseline",
+      {
+        opacity: 1,
+        duration: 0.2,
+        filter: "drop-shadow(0 0 6px var(--laser-color))",
+      },
+      "-=0.55",
+    )
+    // baseline shrink
+    .to("#baseline", {
+      scaleX: 0,
+      transformOrigin: "center center",
+      duration: 0.6,
+      ease: "power4.in",
+    })
+    // baseline flash out
+    .to("#flash-circle", {
+      opacity: 1,
+      transformOrigin: "center center",
+      scale: 1.5,
+      duration: 0.2,
+      ease: "power2.out",
+    })
+    .to(
+      "#flash-circle",
+      {
+        opacity: 0,
+        transformOrigin: "center center",
+        scale: 2,
+        duration: 0.4,
+        ease: "power2.in",
+      },
+      ">-0.1",
+    )
+    // expand and fade out glows
+    .to(
+      svgEl.value.querySelectorAll(".glow"),
+      {
+        opacity: 0,
+        scale: 2,
+        duration: 2,
+        ease: "power2.out",
+      },
+      ">-1",
+    );
 }
 
 defineExpose({ animate });
@@ -199,23 +289,22 @@ onMounted(() => {
     gsap.set(glows, { opacity: 0 });
     gsap.set(laserTip.value, { scale: 1, autoAlpha: 1 });
   });
-  svgEl.value.style.visibility = "visible"; // show
+  // now we can show the svg
+  svgEl.value.style.visibility = "visible";
 });
 </script>
 
 <style scoped>
 .stage {
   display: flex;
-  visibility: hidden; /* hide until animated */
+  /* initially hidden */
+  visibility: hidden;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background: var(--bg-gradient);
-  transition: background 0.5s ease;
 }
 svg {
   width: 100%;
-  max-width: 900px;
+  max-width: 600px;
 }
 .stroke {
   fill: none;
@@ -229,5 +318,12 @@ svg {
   stroke-width: 8;
   opacity: var(--glow-opacity);
   filter: url(#neonBlur);
+}
+#baseline {
+  filter: drop-shadow(4 4 6px var(--laser-color));
+}
+#flash-circle,
+#laser-tip {
+  filter: drop-shadow(4 4 8px var(--laser-color));
 }
 </style>

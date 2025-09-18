@@ -2,6 +2,11 @@
 const route = useRoute();
 const tag = route.params.slug as string;
 
+useSeoMeta({
+  title: `Blog Posts Tagged With '${tag}' - Phil Picton 💀`,
+  description: "See the index of blog posts by Phil with that tag.",
+});
+
 const { data: posts } = await useAsyncData(`tag-${tag}`, () => {
   return queryCollection("blogPost")
     .where("tags", "LIKE", `%${tag}%`) // check JSON array contains string

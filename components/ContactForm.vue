@@ -7,7 +7,9 @@ let contactForm = reactive({
   message: "",
   website: "", // honeypot field
 });
-const validate = ref(false);
+const validateName = ref(false);
+const validateEmail = ref(false);
+const validatePhone = ref(false);
 const loading = ref(false);
 const resultMessage = ref("");
 
@@ -66,7 +68,9 @@ const clearForm = () => {
     message: "",
     website: "",
   };
-  validate.value = false;
+  validateName.value = false;
+  validateEmail.value = false;
+  validatePhone.value = false;
   resultMessage.value = "";
 };
 const submitToServer = () => {
@@ -115,12 +119,12 @@ const handleSubmit = async () => {
         name="name"
         type="text"
         placeholder="name"
-        :class="[{ error: nameError && validate }, 'contact__form-input']"
-        @blur="validate = true"
+        :class="[{ error: nameError && validateName }, 'contact__form-input']"
+        @blur="validateName = true"
       />
       <p class="contact__form-error">
         <transition name="fade" mode="out-in">
-          <span v-if="nameError && validate">{{ nameError }}</span>
+          <span v-if="nameError && validateName">{{ nameError }}</span>
           <br v-else />
         </transition>
       </p>
@@ -131,12 +135,12 @@ const handleSubmit = async () => {
         name="email"
         type="email"
         placeholder="email"
-        :class="[{ error: emailError && validate }, 'contact__form-input']"
-        @blur="validate = true"
+        :class="[{ error: emailError && validateEmail }, 'contact__form-input']"
+        @blur="validateEmail = true"
       />
       <p class="contact__form-error">
         <transition name="fade" mode="out-in">
-          <span v-if="emailError && validate">{{ emailError }}</span>
+          <span v-if="emailError && validateEmail">{{ emailError }}</span>
           <br v-else />
         </transition>
       </p>
@@ -147,12 +151,12 @@ const handleSubmit = async () => {
         name="phone"
         type="tel"
         placeholder="phone"
-        :class="[{ error: phoneError && validate }, 'contact__form-input']"
-        @blur="validate = true"
+        :class="[{ error: phoneError && validatePhone }, 'contact__form-input']"
+        @blur="validatePhone = true"
       />
       <p class="contact__form-error">
         <transition name="fade" mode="out-in">
-          <span v-if="phoneError && validate">{{ phoneError }}</span>
+          <span v-if="phoneError && validatePhone">{{ phoneError }}</span>
           <br v-else />
         </transition>
       </p>
@@ -176,7 +180,6 @@ const handleSubmit = async () => {
         rows="10"
         placeholder="your message"
         class="contact__form-input"
-        @blur="validate = true"
       />
       <br />
       <div class="contact__form-btn-wrap">

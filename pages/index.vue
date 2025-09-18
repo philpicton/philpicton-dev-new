@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const animation = ref(null);
+import type { HomeAnimationNewNew } from "#components";
+const animation = ref<InstanceType<typeof HomeAnimationNewNew> | null>(null);
 const nuxtApp = useNuxtApp();
 
 onMounted(() => {
@@ -7,16 +8,15 @@ onMounted(() => {
 });
 
 const triggerAnimation = () => {
-  if (animation.value && animation.value.animate()) {
+  if (animation.value?.animate) {
     animation.value.animate();
   }
 };
-// When navigating back to homepage, from another page,
-// the animation needs to be triggered after the page
-// transition or it fails as the elements don't exist yet.
+
 nuxtApp.hook("page:transition:finish", () => {
   triggerAnimation();
 });
+
 const { data: home } = await useAsyncData(() =>
   queryCollection("pages").path("/home").first(),
 );
