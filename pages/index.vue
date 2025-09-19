@@ -17,7 +17,7 @@ nuxtApp.hook("page:transition:finish", () => {
   triggerAnimation();
 });
 
-const { data: home } = await useAsyncData(() =>
+const { data: home } = await useAsyncData("home", () =>
   queryCollection("pages").path("/home").first(),
 );
 
