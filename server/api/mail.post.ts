@@ -1,16 +1,17 @@
 import { defineEventHandler, readBody, getHeader, getRequestIP } from "h3";
-import { createTransport } from "nodemailer";
+const { sendMail } = useNodeMailer();
+
 export const runtime = "nodejs";
 
 export default defineEventHandler(async (event) => {
   try {
-    // ✅ Validate Content-Type header
+    // Validate Content-Type header
     const contentType = getHeader(event, "content-type");
     if (!contentType || !contentType.includes("application/json")) {
       return { success: false, error: "Invalid request." };
     }
 
-    // ✅ Get client IP
+    // Get client IP
     const ip = getRequestIP(event) || "unknown";
     const kv = hubKV();
 
@@ -26,12 +27,12 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const { name, email, phone, message, website } = body || {};
 
-    // ✅ Honeypot check
+    // Honeypot check
     if (website) {
       return { success: false, error: "Spam detected." };
     }
 
-    // ✅ Field validation
+    // Field validation
     if (!name || name.length < 2 || name.length > 100) {
       return { success: false, error: "Name is required. 2-100 chars max." };
     }
@@ -43,20 +44,8 @@ export default defineEventHandler(async (event) => {
       return { success: false, error: "Message is too long." };
     }
 
-    // Configure transporter
-    const transporter = createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
     // Prepare email content
     const mailOptions = {
-      from: `"${name}" <${process.env.MAIL_FROM}>`,
       replyTo: `"<${email}>"`,
       to: process.env.MAIL_TO,
       subject: `New Contact Form Submission`,
@@ -74,7 +63,7 @@ export default defineEventHandler(async (event) => {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    await sendMail(mailOptions);
 
     return { success: true };
   } catch (error: any) {

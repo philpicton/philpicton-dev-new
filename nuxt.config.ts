@@ -17,10 +17,21 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/scripts",
     "@nuxtjs/color-mode",
+    "nuxt-nodemailer",
   ],
   hub: {
     kv: true,
     database: true,
+  },
+  nodemailer: {
+    from: process.env.MAIL_FROM,
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT) || 587,
+    secure: Number(process.env.SMTP_PORT) === 465,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
   },
   content: {
     // @ts-expect-error: hub driver is provided by NuxtHub
