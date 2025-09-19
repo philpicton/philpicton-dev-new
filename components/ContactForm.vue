@@ -53,12 +53,7 @@ const isError = computed(() => {
 
 // Funcs --------------------
 const isOkResponse = (response: any): boolean => {
-  return (
-    typeof response === "object" &&
-    response !== null &&
-    response.status &&
-    response.status === 202
-  );
+  return typeof response === "object" && response.success === true;
 };
 const clearForm = () => {
   contactForm = {
@@ -75,7 +70,7 @@ const clearForm = () => {
 };
 const submitToServer = () => {
   return new Promise((resolve, reject) => {
-    fetch(`/api/mail`, {
+    $fetch(`/api/mail`, {
       method: "POST",
       body: JSON.stringify(contactForm),
       headers: {

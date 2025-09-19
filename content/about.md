@@ -17,7 +17,7 @@ After classical training in Switzerland, where I learned to speak German, I work
 
 ### Skills
 
-Nowadays I specialise in front-end web development. [Read more about my tech stack]('/writing/my-tech-stack-coding-skillset'). I'm a kind, friendly and pragmatic person who loves solving problems and building things.
+Nowadays I specialise in front-end web development. [Read more about my tech stack](writing/my-tech-stack-coding-skillset). I'm a kind, friendly and pragmatic person who loves solving problems and building things.
 
 I have a long track record of leadership, and mentorship over my entire career. I love helping people grow and develop, and I’m always happy to share my knowledge and experience with others. I'm very proud of being a small part of what people I've mentored have gone on to achieve.
 

@@ -55,7 +55,8 @@ export default defineEventHandler(async (event) => {
 
     // Prepare email content
     const mailOptions = {
-      from: `"${name}" <${email}>`,
+      from: `"${name}" <${process.env.MAIL_FROM}>`,
+      replyTo: `"<${email}>"`,
       to: process.env.MAIL_TO,
       subject: `New Contact Form Submission`,
       text: `
