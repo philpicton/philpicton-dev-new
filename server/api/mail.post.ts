@@ -1,5 +1,6 @@
 import { defineEventHandler, readBody, getHeader, getRequestIP } from "h3";
-import nodemailer from "nodemailer";
+import { createTransport } from "nodemailer";
+export const runtime = "nodejs";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -43,7 +44,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Configure transporter
-    const transporter = nodemailer.createTransport({
+    const transporter = createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT) || 587,
       secure: false,
