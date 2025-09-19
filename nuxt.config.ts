@@ -20,6 +20,7 @@ export default defineNuxtConfig({
   ],
   hub: {
     kv: true,
+    database: true,
   },
   content: {
     // @ts-expect-error: hub driver is provided by NuxtHub
