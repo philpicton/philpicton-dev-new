@@ -22,6 +22,8 @@ export default defineNuxtConfig({
     kv: true,
   },
   content: {
+    // @ts-expect-error: hub driver is provided by NuxtHub
+    driver: "hub",
     build: {
       markdown: {
         highlight: {

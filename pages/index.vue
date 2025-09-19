@@ -17,13 +17,9 @@ nuxtApp.hook("page:transition:finish", () => {
   triggerAnimation();
 });
 
-const {
-  data: home,
-  error,
-  pending,
-} = await useAsyncData("home", () => queryCollection("pages").all());
-
-console.log("SSR home data:", home.value, error.value, pending.value);
+const { data: home } = await useAsyncData("home", () =>
+  queryCollection("pages").path("/home").first(),
+);
 
 useSeoMeta({
   title: home.value?.title,
