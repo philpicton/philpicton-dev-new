@@ -9,8 +9,8 @@ const links = [
     to: "/about",
   },
   {
-    name: "blog",
-    to: "/blog",
+    name: "writing",
+    to: "/writing",
   },
   {
     name: "contact",

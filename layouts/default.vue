@@ -21,6 +21,6 @@
 .prose h4 > a,
 .prose h3 > a,
 .prose h2 > a {
-  @apply text-slate-800 dark:text-white text-2xl no-underline;
+  @apply text-slate-800 dark:text-white no-underline;
 }
 </style>

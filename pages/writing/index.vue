@@ -2,8 +2,8 @@
 import { ref, computed, watch } from "vue";
 
 useSeoMeta({
-  title: "Recent Blog Posts - Phil Picton 💀",
-  description: "Index of recent blog posts by Phil",
+  title: "Recent Posts - Phil Picton 💀",
+  description: "Index of recent posts by Phil",
 });
 
 // Pagination settings
@@ -40,7 +40,7 @@ watch(
 function goToPage(page: number) {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
-    navigateTo({ path: "/blog", query: { page: page.toString() } });
+    navigateTo({ path: "/writing", query: { page: page.toString() } });
   }
 }
 </script>

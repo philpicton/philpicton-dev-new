@@ -3,8 +3,8 @@ const route = useRoute();
 const tag = route.params.slug as string;
 
 useSeoMeta({
-  title: `Blog Posts Tagged With '${tag}' - Phil Picton 💀`,
-  description: "See the index of blog posts by Phil with that tag.",
+  title: `Posts Tagged With '${tag}' - Phil Picton 💀`,
+  description: "See the index of posts by Phil with that tag.",
 });
 
 const { data: posts } = await useAsyncData(`tag-${tag}`, () => {
@@ -38,7 +38,7 @@ const { data: posts } = await useAsyncData(`tag-${tag}`, () => {
         </li>
       </ul>
       <hr />
-      <BackButton to="/blog"></BackButton>
+      <BackButton to="/writing"></BackButton>
     </template>
     <template v-else>
       <div class="empty-page">

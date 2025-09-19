@@ -5,7 +5,7 @@ const { data: post } = await useAsyncData(route.path, () => {
 });
 useSeoMeta({
   title: `${post?.value?.title || ""} - Phil Picton 💀`,
-  description: `${post?.value?.description || "Read this blog post by Phil Picton."}`,
+  description: `${post?.value?.description || "Read this post by Phil Picton."}`,
 });
 </script>
 
@@ -31,7 +31,7 @@ useSeoMeta({
         <ContentRenderer :value="post.body" />
       </article>
       <hr />
-      <BackButton to="/blog"></BackButton>
+      <BackButton to="/writing"></BackButton>
     </template>
     <template v-else>
       <div class="empty-page">
