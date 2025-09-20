@@ -85,6 +85,26 @@
         fill="var(--laser-color)"
         opacity="0"
       />
+
+      <!-- final flourish image -->
+      <image
+        id="flourish-img"
+        href="/philpicton.png"
+        alt="A picture of Phil Picton"
+        x="150"
+        y="-150"
+        width="100"
+        height="100"
+        opacity="1"
+      />
+      <circle
+        id="image-tint"
+        cx="200"
+        cy="-100"
+        r="52"
+        opacity="0.9"
+        fill="var(--laser-color)"
+      />
     </svg>
   </div>
 </template>
@@ -275,6 +295,53 @@ function animate() {
       },
       ">-1",
     );
+  // final flourish: image drop, bounce, roll, tint fade
+  tl.set("#flourish-img", {
+    opacity: 1,
+  })
+    .add("img-start")
+    .to(
+      "#flourish-img",
+      {
+        y: 130,
+        duration: 1.8,
+        ease: "bounce",
+      },
+      "img-start",
+    )
+    .to(
+      "#image-tint",
+      {
+        y: 130,
+        duration: 1.8,
+        ease: "bounce",
+      },
+      "img-start",
+    )
+
+    .to("#flourish-img", {
+      x: -148,
+      rotation: -360,
+      transformOrigin: "50% 50%",
+      duration: 1.2,
+      ease: "bounce",
+    })
+    .to(
+      "#image-tint",
+      {
+        x: -148,
+        rotation: -360,
+        transformOrigin: "50% 50%",
+        duration: 1.2,
+        ease: "bounce",
+      },
+      "-=1.2",
+    )
+    .to("#image-tint", {
+      opacity: 0.2,
+      duration: 1.2,
+      ease: "sine.out",
+    });
 }
 
 defineExpose({ animate });
