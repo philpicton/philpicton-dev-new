@@ -92,17 +92,17 @@
         href="/philpicton.png"
         alt="A picture of Phil Picton"
         x="150"
-        y="-150"
+        y="-170"
         width="100"
         height="100"
-        opacity="1"
+        opacity="0"
       />
       <circle
         id="image-tint"
         cx="200"
-        cy="-100"
+        cy="-120"
         r="52"
-        opacity="0.9"
+        opacity="0"
         fill="var(--laser-color)"
       />
     </svg>
@@ -296,15 +296,16 @@ function animate() {
       ">-1",
     );
   // final flourish: image drop, bounce, roll, tint fade
-  tl.set("#flourish-img", {
-    opacity: 1,
+  tl.set("#image-tint", {
+    opacity: 0.9,
   })
     .add("img-start")
     .to(
       "#flourish-img",
       {
-        y: 130,
+        y: 150,
         duration: 1.8,
+        opacity: 1,
         ease: "bounce",
       },
       "img-start",
@@ -312,7 +313,7 @@ function animate() {
     .to(
       "#image-tint",
       {
-        y: 130,
+        y: 150,
         duration: 1.8,
         ease: "bounce",
       },
