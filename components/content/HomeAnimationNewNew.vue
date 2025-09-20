@@ -64,7 +64,7 @@
         />
       </g>
       <!-- laser tip -->
-      <circle ref="laserTip" r="4" fill="#00ff7f" id="laser-tip" />
+      <circle ref="laserTip" r="4" fill="#00ff7f" id="laser-tip" cx="-40" />
       <!-- baseline -->
       <line
         opacity="0"
@@ -133,6 +133,25 @@ const pathsData = [
 ];
 
 function animate() {
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (prefersReducedMotion) {
+    // Skip animations: just show the flourish at end position
+    gsap.set("#flourish-img", {
+      opacity: 1,
+      x: -148,
+      y: 150,
+    });
+    gsap.set("#image-tint", {
+      opacity: 0.2,
+      cx: 52,
+      cy: 30,
+    });
+
+    return; // do not run timeline
+  }
   const paths = svgEl.value.querySelectorAll(".stroke");
   const glows = svgEl.value.querySelectorAll(".glow");
 
@@ -142,7 +161,7 @@ function animate() {
     gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
   });
   gsap.set(glows, { opacity: 0 });
-  gsap.set(laserTip.value, { scale: 1, autoAlpha: 1 });
+  gsap.set(laserTip.value, { scale: 1, autoAlpha: 1, opacity: 1 });
 
   const tl = gsap.timeline();
 
