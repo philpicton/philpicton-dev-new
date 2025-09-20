@@ -186,7 +186,7 @@ const handleSubmit = async () => {
           <svg
             v-if="loading"
             role="status"
-            class="w-7 h-7 text-sky-500 animate-spin fill-white"
+            class="w-7 h-7 text-green-600 animate-spin fill-white"
             viewBox="0 0 100 101"
             xmlns="http://www.w3.org/2000/svg"
           >

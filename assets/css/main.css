@@ -51,3 +51,11 @@
   animation: wave-animation 2s ease-in-out 1;
   filter: drop-shadow(0 0 6px var(--laser-color));
 }
+.green-glow {
+  text-shadow:
+    0 0 5px var(--laser-color),
+    0 0 10px var(--laser-color),
+    0 0 20px var(--laser-color),
+    0 0 40px var(--laser-color),
+    0 0 80px var(--laser-color);
+}
