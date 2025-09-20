@@ -1,9 +1,8 @@
 import { defineEventHandler, readBody, getHeader, getRequestIP } from "h3";
-const { sendMail } = useNodeMailer();
-
-export const runtime = "nodejs";
+import { Resend } from "resend";
 
 export default defineEventHandler(async (event) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     // Validate Content-Type header
     const contentType = getHeader(event, "content-type");
@@ -46,8 +45,9 @@ export default defineEventHandler(async (event) => {
 
     // Prepare email content
     const mailOptions = {
-      replyTo: `"<${email}>"`,
-      to: process.env.MAIL_TO,
+      from: `Website <${process.env.MAIL_FROM}>`,
+      replyTo: `${name} <${email}>`,
+      to: [`${process.env.MAIL_TO}`],
       subject: `New Contact Form Submission`,
       text: `
         Name: ${name}
@@ -63,14 +63,18 @@ export default defineEventHandler(async (event) => {
       `,
     };
 
-    await sendMail(mailOptions);
-
-    return { success: true };
+    const { data, error } = await resend.emails.send(mailOptions);
+    if (!error) {
+      console.log("Mail sent:", data);
+      return { success: true };
+    }
+    console.error("Mail send error:", error);
+    return { success: false, error: "Failed to send message." };
   } catch (error: any) {
     console.error("Mail error:", error);
     return {
       success: false,
-      error: "Failed to send message. Please try again later.",
+      error: "Failed to send message.",
     };
   }
 });
