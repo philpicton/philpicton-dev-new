@@ -11,16 +11,16 @@ export default defineEventHandler(async (event) => {
     }
 
     // Get client IP
-    const ip = getRequestIP(event) || "unknown";
-    const kv = hubKV();
+    //const ip = getRequestIP(event) || "unknown";
+    //const kv = hubKV();
 
     // Rate limit: max 3 submissions / 10 minutes per IP
-    const key = `contact:${ip}`;
-    const currentCount = (await kv.get<number>(key)) || 0;
-    if (currentCount >= 3) {
-      return { success: false, error: "Too many submissions." };
-    }
-    await kv.set(key, currentCount + 1, { ttl: 600 }); // expires in 600s = 10 mins
+    //const key = `contact:${ip}`;
+    //const currentCount = (await kv.get<number>(key)) || 0;
+    //if (currentCount >= 3) {
+    //  return { success: false, error: "Too many submissions." };
+    //}
+    //await kv.set(key, currentCount + 1, { ttl: 600 }); // expires in 600s = 10 mins
 
     // Parse request body
     const body = await readBody(event);
