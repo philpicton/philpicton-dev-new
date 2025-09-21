@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark-mode, .dark-mode *));
-
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
@@ -13,49 +12,4 @@
 [data-theme="dark"] {
   --laser-color: #00ff7f; /* neon green for dark mode */
   --glow-opacity: 0.15;
-}
-
-.wave {
-  display: inline-block;
-  transform-origin: 70% 70%; /* pivot around the "wrist" */
-  transition: filter 0.3s ease;
-}
-
-/* Keyframes for waving */
-@keyframes wave-animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  15% {
-    transform: rotate(10deg);
-  }
-  30% {
-    transform: rotate(-8deg);
-  }
-  45% {
-    transform: rotate(10deg);
-  }
-  60% {
-    transform: rotate(-6deg);
-  }
-  75% {
-    transform: rotate(10deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-/* Hover trigger */
-.wave:hover {
-  animation: wave-animation 2s ease-in-out 1;
-  filter: drop-shadow(0 0 6px var(--laser-color));
-}
-.green-glow {
-  text-shadow:
-    0 0 5px var(--laser-color),
-    0 0 10px var(--laser-color),
-    0 0 20px var(--laser-color),
-    0 0 40px var(--laser-color),
-    0 0 80px var(--laser-color);
 }

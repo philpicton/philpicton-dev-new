@@ -72,6 +72,7 @@ const open = ref(false);
 .router-link-active.nav-link {
   @apply bg-slate-200 dark:bg-gray-800;
 }
+/* Animated hamburger button */
 .line {
   fill: none;
   stroke-width: 6;

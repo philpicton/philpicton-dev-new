@@ -118,7 +118,7 @@ gsap.registerPlugin(MotionPathPlugin);
 
 const svgEl = ref(null);
 const laserTip = ref(null);
-
+// The SVG path data for each letter in "hello world" (copied from the exported svg)
 const pathsData = [
   "M 24.555468,48.587124 V 33.229535 H 12.325842 V 48.587124 H 8.257139 V 16.202132 h 4.068703 V 29.889906 H 24.555468 V 16.202132 h 4.068703 v 32.384992 z",
   "m 40.383445,37.603979 q 0.16463,4.303887 2.257778,6.279442 2.116666,1.952037 4.985924,1.952037 1.905,0 3.433703,-0.564444 1.528703,-0.564445 3.174999,-1.669815 l 1.857963,2.610555 q -1.716852,1.364074 -3.95111,2.140185 -2.234259,0.776111 -4.562592,0.776111 -3.621851,0 -6.16185,-1.622778 -2.516481,-1.622777 -3.857036,-4.515554 -1.317037,-2.916296 -1.317037,-6.749813 0,-3.762962 1.317037,-6.679258 1.340555,-2.916295 3.762962,-4.58611 2.445925,-1.669814 5.738517,-1.669814 4.680184,0 7.361294,3.245555 2.704629,3.245554 2.704629,8.889997 0,0.635 -0.04704,1.199445 -0.02352,0.564444 -0.04704,0.964259 z M 47.10974,26.550278 q -2.751666,0 -4.609629,1.952036 -1.857962,1.952037 -2.093147,6.044258 h 12.911663 q -0.07055,-3.974629 -1.74037,-5.973702 -1.669814,-2.022592 -4.468517,-2.022592 z",
@@ -138,7 +138,7 @@ function animate() {
   ).matches;
 
   if (prefersReducedMotion) {
-    // Skip animations: just show the flourish at end position
+    // Skip animations: just show the image at end position
     gsap.set("#flourish-img", {
       opacity: 1,
       x: -148,
@@ -152,6 +152,7 @@ function animate() {
 
     return; // do not run timeline
   }
+
   const paths = svgEl.value.querySelectorAll(".stroke");
   const glows = svgEl.value.querySelectorAll(".glow");
 
@@ -163,6 +164,7 @@ function animate() {
   gsap.set(glows, { opacity: 0 });
   gsap.set(laserTip.value, { scale: 1, autoAlpha: 1, opacity: 1 });
 
+  // TIMELINE ---------------------------------------------------
   const tl = gsap.timeline();
 
   // Animate each path sequentially
@@ -177,6 +179,7 @@ function animate() {
       },
       index * 0.6,
     );
+    // the background glow
     tl.to(
       glow,
       {
@@ -382,9 +385,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Using css instead of tailwind so component is more portable.*/
 .stage {
   display: flex;
-  /* initially hidden */
   visibility: hidden;
   justify-content: center;
   align-items: center;
@@ -412,5 +415,38 @@ svg {
 #flash-circle,
 #laser-tip {
   filter: drop-shadow(4 4 8px var(--laser-color));
+}
+/* Keyframes for waving */
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(10deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  45% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.wave:hover {
+  animation: wave-animation 2s ease-in-out 1;
+  filter: drop-shadow(0 0 6px var(--laser-color));
+}
+.wave {
+  display: inline-block;
+  transform-origin: 70% 70%; /* pivot around the "wrist" */
+  transition: filter 0.3s ease;
 }
 </style>

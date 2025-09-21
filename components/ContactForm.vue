@@ -245,7 +245,6 @@ const handleSubmit = async () => {
   @apply text-green-700 underline;
 }
 /* sometimes you just want to write css.. */
-/*! purgecss start ignore */
 .fade-enter-active,
 .fade-leave-active {
   transition:
@@ -283,17 +282,16 @@ const handleSubmit = async () => {
   }
 }
 /* Change autocomplete styles in WebKit in dark mode */
-.dark input:-webkit-autofill,
-.dark input:-webkit-autofill:hover,
-.dark input:-webkit-autofill:focus,
-.dark textarea:-webkit-autofill,
-.dark textarea:-webkit-autofill:hover,
-.dark textarea:-webkit-autofill:focus,
-.dark select:-webkit-autofill,
-.dark select:-webkit-autofill:hover,
-.dark select:-webkit-autofill:focus {
+.dark-mode input:-webkit-autofill,
+.dark-mode input:-webkit-autofill:hover,
+.dark-mode input:-webkit-autofill:focus,
+.dark-mode textarea:-webkit-autofill,
+.dark-mode textarea:-webkit-autofill:hover,
+.dark-mode textarea:-webkit-autofill:focus,
+.dark-mode select:-webkit-autofill,
+.dark-mode select:-webkit-autofill:hover,
+.dark-mode select:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
   transition: background-color 5000s ease-in-out 0s;
 }
-/*! purgecss end ignore */
 </style>

@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+  text: { type: String, default: "" },
+});
+</script>
+
 <template>
   <NuxtLink
     :to="`/writing/tag/${text}`"
@@ -5,9 +11,3 @@
     >{{ text }}</NuxtLink
   >
 </template>
-
-<script setup>
-defineProps({
-  text: { type: String, default: "" },
-});
-</script>
