@@ -244,32 +244,13 @@ function animate() {
     },
     "+=0.2",
   );
-  // emoji hand wave
-  tl.add(() => {
-    const waveEl = document.querySelector("#wave-emoji");
-    if (waveEl) {
-      // Trigger wave + glow
-      waveEl.style.animation = "wave-animation 2s ease-in-out 1";
-      waveEl.style.filter = "drop-shadow(0 0 6px var(--laser-color))";
-
-      // Reset after animation ends (so hover still works)
-      waveEl.addEventListener(
-        "animationend",
-        () => {
-          waveEl.style.animation = "";
-          waveEl.style.filter = ""; // remove glow until hovered
-        },
-        { once: true },
-      );
-    }
-  });
   // letters drop down
   tl.to(paths, {
     y: 60,
     duration: 0.6,
     ease: "power2.in",
     stagger: 0.05,
-    delay: 2,
+    delay: 0.5,
   })
     // baseline fade in
     .to(
@@ -316,7 +297,7 @@ function animate() {
         duration: 2,
         ease: "power2.out",
       },
-      ">-1",
+      ">-0.3",
     );
   // final flourish: image drop, bounce, roll, tint fade
   tl.set("#image-tint", {
@@ -366,6 +347,25 @@ function animate() {
       duration: 1.2,
       ease: "sine.out",
     });
+  // emoji hand wave
+  tl.add(() => {
+    const waveEl = document.querySelector("#wave-emoji");
+    if (waveEl) {
+      // Trigger wave + glow
+      waveEl.style.animation = "wave-animation 2s ease-in-out 1";
+      waveEl.style.filter = "drop-shadow(0 0 6px var(--laser-color))";
+
+      // Reset after animation ends (so hover still works)
+      waveEl.addEventListener(
+        "animationend",
+        () => {
+          waveEl.style.animation = "";
+          waveEl.style.filter = ""; // remove glow until hovered
+        },
+        { once: true },
+      );
+    }
+  });
 }
 
 defineExpose({ animate });
@@ -416,38 +416,5 @@ svg {
 #flash-circle,
 #laser-tip {
   filter: drop-shadow(4 4 8px var(--laser-color));
-}
-/* Keyframes for waving */
-@keyframes wave-animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  15% {
-    transform: rotate(10deg);
-  }
-  30% {
-    transform: rotate(-8deg);
-  }
-  45% {
-    transform: rotate(10deg);
-  }
-  60% {
-    transform: rotate(-6deg);
-  }
-  75% {
-    transform: rotate(10deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-.wave:hover {
-  animation: wave-animation 2s ease-in-out 1;
-  filter: drop-shadow(0 0 6px var(--laser-color));
-}
-.wave {
-  display: inline-block;
-  transform-origin: 70% 70%;
-  transition: filter 0.3s ease;
 }
 </style>
