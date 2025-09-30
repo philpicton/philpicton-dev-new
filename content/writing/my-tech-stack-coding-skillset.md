@@ -59,18 +59,20 @@ JetBrains IDEs
 
 ### LLMs (aka AI)
 
-I should state at this point that I am very aware of the limitations of, and pitfalls associated with, current and future LLM-based coding tools. At best they are a tool to help you think through a problem, and generate boilerplate. I do not think that heavy reliance on these tools leads to good code, radically better productivity, or personal growth. LLMs do not think, or understand. They are statistics engines tuned to answer the question 'What would a human response to this next question look like, statistically?'. They generate answers based on text already written and scraped from the internet.
+I should state at this point that I am very aware of the limitations of, and pitfalls associated with, LLM-based coding tools. At best they are a tool to help you think through a problem, and generate boilerplate or scaffold something. I do not think that heavy reliance on these tools leads to good code, radically better productivity, or personal growth. Current LLMs do not think, or understand. Yet! They are statistics engines tuned to answer the question 'What would a human response to this next question look like, statistically?'. They generate answers based on text/code already written and scraped from the internet.
 
-I think that the huge investments that have been made into this technology are at risk, as there is not as yet a solid business plan to monetise it to the necessary degree. Until results can be relied upon, I and others will be reluctant to pay good money.
+I think that the huge investments that have been made into this technology are at risk, as there is not as yet a solid business plan to monetise it to the necessary degree. Until high levels of accuracy can be relied upon, I and others will be reluctant to pay good money.
 
-That said, I do not want to be left behind if a big breakthrough occurs. So I do use LLM tools where I think they will help.
+That said, I do not want to be left behind if a big breakthrough occurs. So I do use LLM tools whenever I think they will help. Generating unit tests is a great example.
 
-My current employer does not allow us to use cloud based coding agents/LLMs, so I use Ollama to run local models for coding tasks. I use the [gen.nim](https://github.com/David-Kunz/gen.nvim) Neovim plugin to access the models.
-Current choices: Mistral or Deepseek-Coder (very resource heavy)
+For security reasons, my current employer does not allow us to use cloud based coding agents/LLMs, so for work I use Ollama to run local models for coding tasks. I use the [gen.nvim](https://github.com/David-Kunz/gen.nvim) Neovim plugin to interact with the models from my editor.
+Current choices: Mistral or Deepseek-Coder (very resource heavy).
 
 I use ChatGPT for other prompts.
 
-For personal projects I use Copilot and Copilot chat in Neovim
+For personal projects I use Copilot and Copilot chat in Neovim, and am experimenting with other agents and models.
+
+I recently came across the concept of _[spec driven development](https://github.com/github/spec-kit)_, which is fascinating, sort of a machine-readable version of Documentation Driven Development. It relies on the ability of coding agents to produce working code. The code becomes secondary, and the spec is the source of truth. New requirements are added to the spec, and the code is generated/updated. Very interesting, and something I will be exploring more, particularly how to avoid architecting a monstrously complex spec, and creating '**spec debt**'! Or how to ensure that the spec itself follows best engineering practices.
 
 ---
 
