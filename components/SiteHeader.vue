@@ -13,6 +13,10 @@ const links = [
     to: "/writing",
   },
   {
+    name: "projects",
+    to: "/projects",
+  },
+  {
     name: "contact",
     to: "/contact",
   },

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 showError({
-  statusCode: 302,
+  statusCode: 503,
   statusMessage: "This page is under construction.",
 });
 </script>
