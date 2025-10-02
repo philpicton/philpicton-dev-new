@@ -19,13 +19,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: |
-          # Allow lockfile updates for Dependabot PRs
-          if [ "${{ github.actor }}" == "dependabot[bot]" ]; then
-            bun install
-          else
-            bun install --frozen-lockfile
-          fi
+        run: bun install
 
       - name: Run ESLint
         id: eslint
@@ -154,13 +148,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: |
-          # Allow lockfile updates for Dependabot PRs
-          if [ "${{ github.actor }}" == "dependabot[bot]" ]; then
-            bun install
-          else
-            bun install --frozen-lockfile
-          fi
+        run: bun install
 
       - name: Build project
         id: build
