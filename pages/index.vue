@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { HomeAnimationNewNew } from "#components";
-const animation = ref<InstanceType<typeof HomeAnimationNewNew> | null>(null);
+import type { HomeAnimation } from "#components";
+const animation = ref<InstanceType<typeof HomeAnimation> | null>(null);
 const nuxtApp = useNuxtApp();
 
 onMounted(() => {
@@ -20,6 +20,13 @@ nuxtApp.hook("page:transition:finish", () => {
 const { data: home } = await useAsyncData("home", () =>
   queryCollection("pages").path("/home").first(),
 );
+if (!home.value) {
+  showError({
+    statusCode: 404,
+    statusMessage:
+      "Failed to load page content. On the homepage. Doesn't make a very good first impression does it? 😬",
+  });
+}
 
 useSeoMeta({
   title: home.value?.title,
@@ -29,8 +36,7 @@ useSeoMeta({
 
 <template>
   <div>
-    <HomeAnimationNewNew ref="animation" />
+    <HomeAnimation ref="animation" />
     <ContentRenderer v-if="home" :value="home" />
-    <div v-else>Home not found</div>
   </div>
 </template>

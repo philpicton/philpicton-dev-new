@@ -3,42 +3,41 @@ const route = useRoute();
 const { data: post } = await useAsyncData(route.path, () => {
   return queryCollection("blogPost").path(route.path).first();
 });
+
+if (!post.value) {
+  showError({
+    statusCode: 404,
+    statusMessage: "Blog post not found.",
+  });
+}
+
 useSeoMeta({
-  title: `${post?.value?.title || ""} - Phil Picton 💀`,
+  title: `${post?.value?.title || "Post"} - Phil Picton 💀`,
   description: `${post?.value?.description || "Read this post by Phil Picton."}`,
 });
 </script>
 
 <template>
   <div>
-    <template v-if="post">
-      <article
-        class="prose-code:before:content-none prose-code:after:content-none"
-      >
-        <BlogTag v-for="tag in post.tags" :key="tag" :text="tag"></BlogTag>
-        <div>
-          <h2>{{ post.title }}</h2>
-          <small>{{
-            new Date(post.date).toLocaleDateString("en-GB", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          }}</small>
-        </div>
-        <hr />
-        <ContentRenderer :value="post.body" />
-      </article>
-      <hr />
-      <BackButton to="/writing"></BackButton>
-    </template>
-    <template v-else>
-      <div class="empty-page">
-        <h1>Page Not Found</h1>
-        <p>Oops! The content you're looking for doesn't exist.</p>
-        <NuxtLink to="/">Go back home</NuxtLink>
+    <article
+      class="prose-code:before:content-none prose-code:after:content-none"
+    >
+      <BlogTag v-for="tag in post.tags" :key="tag" :text="tag"></BlogTag>
+      <div>
+        <h2>{{ post.title }}</h2>
+        <small>{{
+          new Date(post.date).toLocaleDateString("en-GB", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }}</small>
       </div>
-    </template>
+      <hr />
+      <ContentRenderer :value="post.body" />
+    </article>
+    <hr />
+    <BackButton to="/writing"></BackButton>
   </div>
 </template>

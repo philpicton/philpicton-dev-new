@@ -18,6 +18,13 @@ const { data: posts } = await useAsyncData("recent-posts", () => {
     .all();
 });
 
+if (!posts.value) {
+  showError({
+    statusCode: 500,
+    statusMessage: "Failed to load posts.",
+  });
+}
+
 // Compute paginated posts
 const totalPages = computed(() =>
   Math.ceil((posts.value?.length || 0) / perPage),
