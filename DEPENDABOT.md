@@ -15,10 +15,12 @@ This project uses a comprehensive security setup to protect against supply chain
 ### Auto-Merge Policy
 
 ✅ **Auto-merged after tests pass:**
+
 - Patch updates (e.g., 1.0.0 → 1.0.1)
 - Minor updates (e.g., 1.0.0 → 1.1.0)
 
 ❌ **Requires manual review:**
+
 - Major updates (e.g., 1.0.0 → 2.0.0) - potential breaking changes
 - Any update that fails tests or linting
 
@@ -27,12 +29,14 @@ This project uses a comprehensive security setup to protect against supply chain
 ### 1. Automated Security Scanning
 
 **Weekly Security Audits** (`.github/workflows/security-audit.yml`)
+
 - Runs `bun audit` to check for known vulnerabilities
 - Fails CI if high or critical vulnerabilities are found
 - Uploads audit reports as artifacts
 - Checks for outdated dependencies
 
 **Manual Security Commands:**
+
 ```bash
 # Run security audit
 bun run audit
@@ -53,6 +57,7 @@ bun run outdated
 ### 3. Package Registry Security
 
 Configuration in `.npmrc`:
+
 - ✅ Only use official npm registry
 - ✅ Enable audit on install
 - ✅ Save exact versions (no version ranges)
@@ -64,6 +69,7 @@ Configuration in `.npmrc`:
 Enable these in your GitHub repository settings:
 
 **Settings → Security & analysis:**
+
 1. ✅ Dependency graph
 2. ✅ Dependabot alerts
 3. ✅ Dependabot security updates
@@ -73,6 +79,7 @@ Enable these in your GitHub repository settings:
 ### 5. Branch Protection
 
 **Recommended settings for `main` branch:**
+
 1. ✅ Require pull request reviews
 2. ✅ Require status checks to pass:
    - Linting
@@ -88,6 +95,7 @@ Enable these in your GitHub repository settings:
 **Triggers:** When Dependabot opens/updates a PR
 
 **Process:**
+
 1. Runs linter
 2. Builds the project
 3. If tests pass:
@@ -100,12 +108,14 @@ Enable these in your GitHub repository settings:
 ### 2. Security Audit (`.github/workflows/security-audit.yml`)
 
 **Triggers:**
+
 - Push to main
 - Pull requests
 - Weekly schedule (Mondays 9 AM UTC)
 - Manual trigger
 
 **Process:**
+
 1. Runs `bun audit`
 2. Checks for high/critical vulnerabilities
 3. Uploads audit report
@@ -137,18 +147,20 @@ Enable these in your GitHub repository settings:
 ### Monitoring
 
 **Set up alerts for:**
+
 - 📧 Dependabot security alerts (email notifications)
 - 🔔 GitHub Actions failures
 - 📊 Weekly security audit reports
 
 **Regular reviews:**
+
 - Weekly: Review Dependabot PRs
 - Monthly: Manual dependency audit
 - Quarterly: Full security review
 
 ## 🚨 Incident Response
 
-### If a vulnerability is discovered:
+### If a vulnerability is discovered
 
 1. **Critical/High severity:**
    - Merge Dependabot PR immediately after tests pass
@@ -166,15 +178,18 @@ Enable these in your GitHub repository settings:
 ## 📝 Maintenance
 
 ### Weekly Tasks
+
 - [ ] Review and merge Dependabot PRs
 - [ ] Check security audit results
 
 ### Monthly Tasks
+
 - [ ] Run `bun run outdated` to check for new versions
 - [ ] Review and update dependencies with major versions
 - [ ] Check for abandoned/deprecated packages
 
 ### Quarterly Tasks
+
 - [ ] Full security review
 - [ ] Update security policies
 - [ ] Review and update branch protection rules
@@ -189,6 +204,7 @@ Enable these in your GitHub repository settings:
 ## 🤝 Contributing
 
 When contributing, ensure:
+
 - All tests pass locally
 - Run `bun run audit` before committing
 - Don't add dependencies without discussion
