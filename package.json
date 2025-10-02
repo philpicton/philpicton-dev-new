@@ -9,7 +9,10 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "audit": "bun audit",
+    "audit:fix": "bun audit --fix",
+    "outdated": "bun outdated"
   },
   "dependencies": {
     "@nuxt/content": "3.5.1",
