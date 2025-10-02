@@ -29,16 +29,14 @@ Set up environment variables by creating a `.env` file in the root directory. Yo
 
 ## TODOs
 
-- [ ] Add unit tests
-- [ ] Portfolio/projects section
+- [~] Add unit tests
+- [~] Portfolio/projects section
 - [ ] More content
-- [x] Styling is inconsistent, some places have inline tailwind, or @apply, or vanilla css.
-- [x] Fix rate limiting bug in contact form API
-- [x] Fix contact form reactivity bug
-- [x] Add input sanitization to prevent XSS attacks
-- [x] Improve form accessibility with ARIA attributes
-- [ ] Tidy up the animation TL as its a bit verbose
+- [ ] Tidy up the animation
 - [ ] Set up dependabot
+- [ ] more checks/linting/etc in gh actions
+- [ ] blog features (rss, search, etc)
+- [ ] CSRF tokens
 
 ## Development Server
 
