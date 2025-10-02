@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Data -------------------
-let contactForm = reactive({
+const contactForm = reactive({
   name: "",
   email: "",
   phone: "",
@@ -52,37 +52,39 @@ const isError = computed(() => {
 });
 
 // Funcs --------------------
-const isOkResponse = (response: any): boolean => {
-  return typeof response === "object" && response.success === true;
+interface ApiResponse {
+  success: boolean;
+  error?: string;
+}
+
+const isOkResponse = (response: unknown): response is ApiResponse => {
+  return (
+    typeof response === "object" &&
+    response !== null &&
+    "success" in response &&
+    response.success === true
+  );
 };
 const clearForm = () => {
-  contactForm = {
+  Object.assign(contactForm, {
     name: "",
     email: "",
     phone: "",
     message: "",
     website: "",
-  };
+  });
   validateName.value = false;
   validateEmail.value = false;
   validatePhone.value = false;
   resultMessage.value = "";
 };
 const submitToServer = () => {
-  return new Promise((resolve, reject) => {
-    $fetch(`/api/mail`, {
-      method: "POST",
-      body: JSON.stringify(contactForm),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        resolve(response);
-      })
-      .catch((err) => {
-        reject(err);
-      });
+  return $fetch(`/api/mail`, {
+    method: "POST",
+    body: JSON.stringify(contactForm),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 };
 const handleSubmit = async () => {
@@ -114,13 +116,20 @@ const handleSubmit = async () => {
         name="name"
         type="text"
         placeholder="name"
+        :aria-invalid="nameError && validateName ? 'true' : 'false'"
+        :aria-describedby="nameError && validateName ? 'name-error' : undefined"
         :class="[
           'px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600',
           { error: nameError && validateName },
         ]"
         @blur="validateName = true"
       />
-      <p class="text-red-500 text-sm my-0!">
+      <p
+        id="name-error"
+        role="alert"
+        aria-live="polite"
+        class="text-red-500 text-sm my-0!"
+      >
         <transition name="fade" mode="out-in">
           <span v-if="nameError && validateName">{{ nameError }}</span>
           <br v-else />
@@ -133,13 +142,22 @@ const handleSubmit = async () => {
         name="email"
         type="email"
         placeholder="email"
+        :aria-invalid="emailError && validateEmail ? 'true' : 'false'"
+        :aria-describedby="
+          emailError && validateEmail ? 'email-error' : undefined
+        "
         :class="[
           'px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600',
           { error: emailError && validateEmail },
         ]"
         @blur="validateEmail = true"
       />
-      <p class="text-red-500 text-sm my-0!">
+      <p
+        id="email-error"
+        role="alert"
+        aria-live="polite"
+        class="text-red-500 text-sm my-0!"
+      >
         <transition name="fade" mode="out-in">
           <span v-if="emailError && validateEmail">{{ emailError }}</span>
           <br v-else />
@@ -152,13 +170,22 @@ const handleSubmit = async () => {
         name="phone"
         type="tel"
         placeholder="phone"
+        :aria-invalid="phoneError && validatePhone ? 'true' : 'false'"
+        :aria-describedby="
+          phoneError && validatePhone ? 'phone-error' : undefined
+        "
         :class="[
           'px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600',
           { error: phoneError && validatePhone },
         ]"
         @blur="validatePhone = true"
       />
-      <p class="text-red-500 text-sm my-0!">
+      <p
+        id="phone-error"
+        role="alert"
+        aria-live="polite"
+        class="text-red-500 text-sm my-0!"
+      >
         <transition name="fade" mode="out-in">
           <span v-if="phoneError && validatePhone">{{ phoneError }}</span>
           <br v-else />
@@ -167,8 +194,8 @@ const handleSubmit = async () => {
       <br />
       <label for="website" class="hidden" tabindex="-1">website</label>
       <input
-        name="website"
         v-model="contactForm.website"
+        name="website"
         type="text"
         class="hidden"
         tabindex="-1"

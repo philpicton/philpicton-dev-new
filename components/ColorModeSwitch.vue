@@ -6,11 +6,15 @@ const onClick = () =>
   colorMode.value === "light"
     ? (colorMode.preference = "dark")
     : (colorMode.preference = "light");
+
+const ariaLabel = computed(() =>
+  colorMode.value === "dark" ? "Switch to light mode" : "Switch to dark mode",
+);
 </script>
 
 <template>
   <button
-    aria-label="Color Mode"
+    :aria-label="ariaLabel"
     class="w-5 h-5 hover:text-green-600 transition flex flex-col justify-center"
     @click="onClick"
   >

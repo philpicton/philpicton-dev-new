@@ -9,18 +9,44 @@ type MailOptions = {
   html: string;
 };
 
+type ContactFormData = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  website?: string;
+};
+
 export default defineEventHandler(async (event) => {
   // 1. State ----------------------------------
 
   const kv = hubKV();
   const contentType = getHeader(event, "content-type");
-  const body = await readBody(event);
+  const body = await readBody<ContactFormData>(event);
   const { name, email, phone, message, website } = body || {};
   const ip = getRequestIP(event) || "unknown";
   const maxSubmissions = process.env.MAX_SUBMISSIONS;
   const ttl = process.env.RATE_LIMIT_TTL_SECONDS;
 
   // 2. Functions ------------------------------
+
+  // Sanitize HTML entities to prevent XSS
+  function escapeHtml(text: string): string {
+    const map: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+    return text.replace(/[&<>"']/g, (char) => map[char] || char);
+  }
+
+  // Sanitize input by trimming and escaping
+  function sanitizeInput(input: string | undefined, maxLength: number): string {
+    if (!input) return "";
+    return escapeHtml(input.trim().slice(0, maxLength));
+  }
 
   async function belowRateLimit() {
     const key = `contact:${ip}`;
@@ -32,7 +58,7 @@ export default defineEventHandler(async (event) => {
     return true;
   }
 
-  function validate() {
+  async function validate() {
     // Validate Content-Type header
     if (!contentType || !contentType.includes("application/json")) {
       return { success: false, error: "Invalid Content-Type." };
@@ -58,7 +84,8 @@ export default defineEventHandler(async (event) => {
     }
 
     // check rate limit
-    if (!belowRateLimit) {
+    const withinLimit = await belowRateLimit();
+    if (!withinLimit) {
       return {
         success: false,
         error: "Rate limit exceeded. Please try again later.",
@@ -69,22 +96,28 @@ export default defineEventHandler(async (event) => {
   }
 
   function getEmail(): MailOptions {
+    // Sanitize all inputs before using them
+    const sanitizedName = sanitizeInput(name, 100);
+    const sanitizedEmail = email?.trim() || "";
+    const sanitizedPhone = sanitizeInput(phone, 20);
+    const sanitizedMessage = sanitizeInput(message, 2000);
+
     return {
       from: `Website <${process.env.MAIL_FROM}>`,
-      replyTo: `${name} <${email}>`,
+      replyTo: `${sanitizedName} <${sanitizedEmail}>`,
       to: [`${process.env.MAIL_TO}`],
       subject: `New Contact Form Submission`,
       text: `
-        Name: ${name}
-        Email: ${email}
-        Phone: ${phone || "N/A"}
-        Message: ${message || "(no message)"}
+        Name: ${sanitizedName}
+        Email: ${sanitizedEmail}
+        Phone: ${sanitizedPhone || "N/A"}
+        Message: ${sanitizedMessage || "(no message)"}
       `,
       html: `
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone || "N/A"}</p>
-        <p><b>Message:</b><br/>${message || "(no message)"}</p>
+        <p><b>Name:</b> ${sanitizedName}</p>
+        <p><b>Email:</b> ${sanitizedEmail}</p>
+        <p><b>Phone:</b> ${sanitizedPhone || "N/A"}</p>
+        <p><b>Message:</b><br/>${sanitizedMessage.replace(/\n/g, "<br/>") || "(no message)"}</p>
       `,
     };
   }
@@ -101,11 +134,15 @@ export default defineEventHandler(async (event) => {
       });
       if (res.ok) {
         const data = await res.json();
-        console.log("Mail sent:", data);
+        if (process.env.NODE_ENV === "development") {
+          console.log("Mail sent:", data);
+        }
         return true;
       }
-    } catch (error: any) {
-      console.error("Mail error:", error);
+    } catch (error: unknown) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Mail error:", error);
+      }
       return false;
     }
     return false;
@@ -114,7 +151,7 @@ export default defineEventHandler(async (event) => {
   // 3. Main ------------------------------------
   try {
     // preflight checks
-    const valid = validate();
+    const valid = await validate();
     if (!valid.success) {
       return { success: false, error: valid.error };
     }
@@ -126,8 +163,10 @@ export default defineEventHandler(async (event) => {
     }
     return { success: false, error: "Failed to send email." };
     // catch errors
-  } catch (error) {
-    console.error("Server error:", error);
+  } catch (error: unknown) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("Server error:", error);
+    }
     return { success: false, error: "Server error." };
   }
 });

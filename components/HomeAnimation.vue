@@ -6,7 +6,7 @@
       height="240"
       viewBox="0 0 317.49999 63.5"
       xmlns="http://www.w3.org/2000/svg"
-      alt="The words hello world are animated onto the page, looking like they were drawn by a green laser. Then they fall into the floor. Its a tricky animation to show off my skills."
+      aria-label="The words hello world are animated onto the page, looking like they were drawn by a green laser. Then they fall into the floor. Its a tricky animation to show off my skills."
     >
       <defs>
         <filter id="neonBlur" x="-100%" y="-100%" width="300%" height="300%">
@@ -64,11 +64,11 @@
         />
       </g>
       <!-- laser tip -->
-      <circle ref="laserTip" r="4" fill="#00ff7f" id="laser-tip" cx="-40" />
+      <circle id="laser-tip" ref="laserTip" r="4" fill="#00ff7f" cx="-40" />
       <!-- baseline -->
       <line
-        opacity="0"
         id="baseline"
+        opacity="0"
         stroke="var(--laser-color)"
         stroke-width="2"
         x1="0"
@@ -386,7 +386,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Using css instead of tailwind so component is more portable.*/
+/* Vanilla CSS required for complex GSAP animations and SVG filters that cannot be achieved with Tailwind */
 .stage {
   display: flex;
   visibility: hidden;

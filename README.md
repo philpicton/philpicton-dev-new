@@ -32,7 +32,11 @@ Set up environment variables by creating a `.env` file in the root directory. Yo
 - [ ] Add unit tests
 - [ ] Portfolio/projects section
 - [ ] More content
-- [ ] Styling is inconsistent, some places have inline tailwind, or @apply, or vanilla css.
+- [x] Styling is inconsistent, some places have inline tailwind, or @apply, or vanilla css.
+- [x] Fix rate limiting bug in contact form API
+- [x] Fix contact form reactivity bug
+- [x] Add input sanitization to prevent XSS attacks
+- [x] Improve form accessibility with ARIA attributes
 - [ ] Tidy up the animation TL as its a bit verbose
 - [ ] Set up dependabot
 
@@ -60,5 +64,5 @@ Locally preview production build:
 bun run preview
 ```
 
-Check out the Nuxt [deployment documentation](https://nuxt.com/docs/getting-started/deployment). 
-Check out [NuxtHub](https://hub.nuxt.com/docs/getting-started/deploy) for more. 
+Check out the Nuxt [deployment documentation](https://nuxt.com/docs/getting-started/deployment).
+Check out [NuxtHub](https://hub.nuxt.com/docs/getting-started/deploy) for more.

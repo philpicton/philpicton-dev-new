@@ -18,7 +18,7 @@ function glitch() {
   const flickers = gsap.utils.random(2, 4, 1);
   const doWarp = Math.random() < 0.4;
 
-  let tl = gsap.timeline({
+  const tl = gsap.timeline({
     onComplete: () => {
       gsap.delayedCall(gsap.utils.random(0.3, 1.5), glitch);
     },
@@ -56,6 +56,7 @@ onMounted(() => {
 
 <template>
   <div ref="text" style="opacity: 1; text-shadow: none">
+    <!-- Inline styles required for GSAP animation manipulation -->
     <slot />
   </div>
 </template>

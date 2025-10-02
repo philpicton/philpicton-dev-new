@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ref, computed, watch } from "vue";
-
 useSeoMeta({
   title: "Recent Posts - Phil Picton 💀",
   description: "Index of recent posts by Phil",
@@ -67,14 +65,15 @@ function goToPage(page: number) {
     <div class="flex justify-center gap-2 mt-6">
       <button
         :disabled="currentPage === 1"
-        @click="goToPage(currentPage - 1)"
         class="px-2 py-1 border rounded disabled:opacity-50 flex items-center justify-center"
+        @click="goToPage(currentPage - 1)"
       >
         <Icon name="formkit:stepback" size="24" class="block" />
       </button>
       <button
         v-for="page in totalPages"
         :key="page"
+        :aria-current="page === currentPage ? 'page' : undefined"
         :class="[
           'px-3 py-1 border rounded ',
           page === currentPage ? 'text-green-600' : '',
@@ -86,8 +85,8 @@ function goToPage(page: number) {
 
       <button
         :disabled="currentPage === totalPages"
-        @click="goToPage(currentPage + 1)"
         class="px-2 py-1 border rounded disabled:opacity-50 flex items-center justify-center"
+        @click="goToPage(currentPage + 1)"
       >
         <Icon name="formkit:stepforward" size="24" />
       </button>

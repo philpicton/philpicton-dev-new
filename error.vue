@@ -1,5 +1,12 @@
 <script setup lang="ts">
-defineProps({ error: Object });
+interface ErrorProps {
+  error?: {
+    statusCode?: number;
+    statusMessage?: string;
+  };
+}
+
+defineProps<ErrorProps>();
 
 useSeoMeta({
   title: "Error page - Phil Picton",
