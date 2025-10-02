@@ -33,5 +33,19 @@ export default defineNuxtConfig({
       },
     },
   },
+  fonts: {
+    families: [
+      {
+        name: "Inter",
+        provider: "google",
+        weights: [300, 400],
+      },
+    ],
+    defaults: {
+      weights: [300, 400],
+      styles: ["normal"],
+      subsets: ["latin"],
+    },
+  },
   ssr: true, // enable server-side rendering at build time
 });
