@@ -1,6 +1,6 @@
 # Phil Picton - Personal Website
 
-Modern, performant personal website built with Nuxt 3, featuring a blog, portfolio, and contact form. Deployed on Cloudflare Workers via NuxtHub.
+Modern, performant personal website built with Nuxt 3, featuring a blog, portfolio (WIP), and contact form. Deployed on Cloudflare Workers via NuxtHub.
 
 [![Deploy to NuxtHub](https://img.shields.io/badge/Deploy-NuxtHub-00DC82?logo=nuxt.js)](https://hub.nuxt.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript)](https://www.typescriptlang.org/)
@@ -57,8 +57,8 @@ Modern, performant personal website built with Nuxt 3, featuring a blog, portfol
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
+# Clone the repository (you should probably rename it too!)
+git clone https://github.com/philpicton/philpicton-dev-new.git
 cd philpicton-dev-new
 
 # Install dependencies
