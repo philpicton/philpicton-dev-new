@@ -233,6 +233,7 @@ npx nuxthub preview
 ### Contact Form Security
 
 - 🍯 Honeypot field
+- 🚫 Reactive frontend validation
 - ⏱️ Rate limiting (Cloudflare KV)
 - 🧹 Input sanitization
 - 🛡️ XSS prevention
@@ -246,7 +247,7 @@ npx nuxthub preview
 | **Runtime**   | Bun                              |
 | **Styling**   | Tailwind CSS v4                  |
 | **Content**   | Nuxt Content (Markdown)          |
-| **Animation** | GSAP                             |
+| **Animation** | GSAP, SVG, CSS                   |
 | **Language**  | TypeScript (strict mode)         |
 | **Linting**   | ESLint, Prettier                 |
 | **Hosting**   | Cloudflare Workers (via NuxtHub) |
@@ -259,8 +260,7 @@ npx nuxthub preview
 
 - [GitHub Settings Guide](.github/GITHUB_SETTINGS.md) - Repository configuration
 - [Quick Reference](.github/SETTINGS_QUICK_REFERENCE.md) - Fast setup guide
-- [Dependabot Guide](DEPENDABOT.md) - Dependency management
-- [Security Policy](SECURITY.md) - Vulnerability reporting
+- [Dependabot Guide](.github/DEPENDABOT.md) - Dependency management
 
 ## 🤝 Contributing
 
