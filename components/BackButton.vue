@@ -15,13 +15,13 @@ function goBack() {
 </script>
 
 <template>
-  <button type="button" class="router__link" @click="goBack">
+  <button type="button" class="hover:text-green-700 dark:hover:text-green-600" @click="goBack">
     <svg
       width="38"
       height="8"
       viewBox="0 0 38 8"
       xmlns="http://www.w3.org/2000/svg"
-      class="inline"
+      class="inline transition-all duration-500 ease-in-out hover:-translate-x-1"
       alt=""
     >
       <path
@@ -34,15 +34,3 @@ function goBack() {
     </small>
   </button>
 </template>
-<style>
-@reference '../assets/css/main.css';
-.router__link {
-  @apply hover:text-green-700 dark:hover:text-green-600;
-  & svg {
-    @apply transition-all duration-500 ease-in-out;
-  }
-}
-.router__link:hover svg {
-  @apply -translate-x-1;
-}
-</style>

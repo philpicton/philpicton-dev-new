@@ -106,67 +106,76 @@ const handleSubmit = async () => {
 
 <template>
   <div>
-    <form class="contact__form" @submit="handleSubmit">
-      <label for="name">Your name</label>
+    <form class="flex flex-col" @submit="handleSubmit">
+      <label for="name" class="pt-3">Your name</label>
       <input
         id="name"
         v-model="contactForm.name"
         name="name"
         type="text"
         placeholder="name"
-        :class="[{ error: nameError && validateName }, 'contact__form-input']"
+        :class="[
+          'px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600',
+          { error: nameError && validateName },
+        ]"
         @blur="validateName = true"
       />
-      <p class="contact__form-error">
+      <p class="text-red-500 text-sm my-0!">
         <transition name="fade" mode="out-in">
           <span v-if="nameError && validateName">{{ nameError }}</span>
           <br v-else />
         </transition>
       </p>
-      <label for="email">Your email address</label>
+      <label for="email" class="pt-3">Your email address</label>
       <input
         id="email"
         v-model="contactForm.email"
         name="email"
         type="email"
         placeholder="email"
-        :class="[{ error: emailError && validateEmail }, 'contact__form-input']"
+        :class="[
+          'px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600',
+          { error: emailError && validateEmail },
+        ]"
         @blur="validateEmail = true"
       />
-      <p class="contact__form-error">
+      <p class="text-red-500 text-sm my-0!">
         <transition name="fade" mode="out-in">
           <span v-if="emailError && validateEmail">{{ emailError }}</span>
           <br v-else />
         </transition>
       </p>
-      <label for="phone">Your phone number</label>
+      <label for="phone" class="pt-3">Your phone number</label>
       <input
         id="phone"
         v-model="contactForm.phone"
         name="phone"
         type="tel"
         placeholder="phone"
-        :class="[{ error: phoneError && validatePhone }, 'contact__form-input']"
+        :class="[
+          'px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600',
+          { error: phoneError && validatePhone },
+        ]"
         @blur="validatePhone = true"
       />
-      <p class="contact__form-error">
+      <p class="text-red-500 text-sm my-0!">
         <transition name="fade" mode="out-in">
           <span v-if="phoneError && validatePhone">{{ phoneError }}</span>
           <br v-else />
         </transition>
       </p>
       <br />
-      <label for="website" style="display: none" tabindex="-1">website</label>
+      <label for="website" class="hidden" tabindex="-1">website</label>
       <input
         name="website"
         v-model="contactForm.website"
         type="text"
-        style="display: none"
+        class="hidden"
         tabindex="-1"
         autocomplete="off"
       />
 
-      <label for="message">Your message</label>
+      <label for="message" class="pt-3">Your message</label>
       <textarea
         id="message"
         v-model="contactForm.message"
@@ -174,13 +183,13 @@ const handleSubmit = async () => {
         cols="30"
         rows="10"
         placeholder="your message"
-        class="contact__form-input"
+        class="px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600"
       />
       <br />
-      <div class="contact__form-btn-wrap">
+      <div class="w-full text-center">
         <button
           :disabled="isError || loading"
-          class="contact__form-btn"
+          class="text-white bg-green-700 w-[50%] py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 hover:shadow-xl hover:opacity-75 ease-in-out duration-300 flex flex-row items-center justify-center mx-auto mt-5 disabled:opacity-40 disabled:cursor-not-allowed"
           @click.stop.prevent="handleSubmit"
         >
           <svg
@@ -204,47 +213,21 @@ const handleSubmit = async () => {
       </div>
     </form>
     <transition name="fade">
-      <div v-if="resultMessage !== ''" class="message">
+      <div
+        v-if="resultMessage !== ''"
+        class="flex flex-col items-center px-5 py-1 mt-5"
+      >
         <p>{{ resultMessage }}</p>
-        <nuxt-link to="/" tag="a" class="message__link">Home</nuxt-link>
+        <nuxt-link to="/" tag="a" class="text-green-700 underline"
+          >Home</nuxt-link
+        >
       </div>
     </transition>
   </div>
 </template>
 
 <style scoped>
-@import "../assets/css/main.css";
-.contact__form {
-  @apply flex flex-col;
-}
-.contact__form label {
-  @apply pt-3;
-}
-.contact__form-input {
-  @apply px-2 py-2 rounded-lg bg-inherit border-2 focus:ring-1 focus:ring-green-600 dark:focus:ring-green-600 focus:border-green-600 dark:focus:border-green-600;
-}
-.contact__form-div {
-  @apply flex flex-row items-center;
-}
-.contact__form-error {
-  @apply text-red-500 text-sm my-0;
-}
-.contact__form-btn-wrap {
-  @apply w-full text-center;
-}
-.contact__form-btn {
-  @apply text-white bg-green-700 w-[50%] py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 hover:shadow-xl hover:opacity-75 ease-in-out duration-300 flex flex-row items-center justify-center mx-auto mt-5;
-}
-.contact__form-btn:disabled {
-  @apply opacity-40 hover:cursor-not-allowed;
-}
-.message {
-  @apply flex flex-col items-center px-5 py-1 mt-5;
-}
-.message__link {
-  @apply text-green-700 underline;
-}
-/* sometimes you just want to write css.. */
+/* Fade transition animation */
 .fade-enter-active,
 .fade-leave-active {
   transition:
@@ -255,7 +238,8 @@ const handleSubmit = async () => {
 .fade-leave-to {
   opacity: 0;
 }
-.contact__form-input.error {
+/* Error shake animation */
+.error {
   border-color: red;
   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);

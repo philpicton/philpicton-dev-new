@@ -7,16 +7,13 @@ useSeoMeta({
 
 <template>
   <section>
-    <div
-      style="width: 100%; height: 0; padding-bottom: 50%; position: relative"
-    >
+    <div class="w-full h-0 pb-[50%] relative">
       <iframe
         src="https://giphy.com/embed/6uGhT1O4sxpi8"
         width="100%"
         height="100%"
-        style="position: absolute"
+        class="absolute giphy-embed"
         frameBorder="0"
-        class="giphy-embed"
       ></iframe>
     </div>
     <h1>404 - Page not found</h1>
