@@ -11,7 +11,7 @@ export interface BlogPostItem extends BlogPostCollectionItem {
   description: string;
   tags: string[];
   image: string;
-  date: Date;
+  date: string;
 }
 
 export type BlogPostList = {
