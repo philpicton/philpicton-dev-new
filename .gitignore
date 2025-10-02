@@ -25,3 +25,8 @@ logs
 
 ./DS-Store
 
+# Test outputs
+coverage
+.vitest
+playwright/.cache
+
