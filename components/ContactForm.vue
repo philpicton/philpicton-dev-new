@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { MailApiResponse } from "~/types/types";
+
 // Data -------------------
 const contactForm = reactive({
   name: "",
@@ -52,12 +54,7 @@ const isError = computed(() => {
 });
 
 // Funcs --------------------
-interface ApiResponse {
-  success: boolean;
-  error?: string;
-}
-
-const isOkResponse = (response: unknown): response is ApiResponse => {
+const isOkResponse = (response: unknown): response is MailApiResponse => {
   return (
     typeof response === "object" &&
     response !== null &&

@@ -20,3 +20,8 @@ export type BlogPostList = {
   tags: string[];
   path: string;
 }[];
+
+export interface MailApiResponse {
+  success: boolean;
+  error?: string;
+}

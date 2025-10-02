@@ -1,4 +1,5 @@
 import { defineEventHandler, readBody, getHeader, getRequestIP } from "h3";
+import type { MailApiResponse } from "~/types/types";
 
 type MailOptions = {
   from: string;
@@ -58,7 +59,7 @@ export default defineEventHandler(async (event) => {
     return true;
   }
 
-  async function validate() {
+  async function validate(): Promise<MailApiResponse> {
     // Validate Content-Type header
     if (!contentType || !contentType.includes("application/json")) {
       return { success: false, error: "Invalid Content-Type." };
@@ -74,8 +75,10 @@ export default defineEventHandler(async (event) => {
       return { success: false, error: "Name is required. 2-100 chars max." };
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
+    // Email validation (RFC 5322 standard)
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!email || email.length > 254 || !emailRegex.test(email)) {
       return { success: false, error: "A valid email is required." };
     }
 
@@ -92,7 +95,7 @@ export default defineEventHandler(async (event) => {
       };
     }
 
-    return { success: true, error: "" };
+    return { success: true };
   }
 
   function getEmail(): MailOptions {
