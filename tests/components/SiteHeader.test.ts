@@ -31,13 +31,13 @@ describe("SiteHeader", () => {
 
     expect(menuButton).toBeDefined();
     if (menuButton) {
-      // @ts-ignore
+      // @ts-expect-error typescript does not infer the type of the component
       expect(wrapper.vm.open.value).toBe(false);
       await menuButton.trigger("click");
-      // @ts-ignore
+      // @ts-expect-error typescript does not infer the type of the component
       expect(wrapper.vm.open.value).toBe(true);
       await menuButton.trigger("click");
-      // @ts-ignore
+      // @ts-expect-error typescript does not infer the type of the component
       expect(wrapper.vm.open.value).toBe(false);
     }
   });
@@ -51,11 +51,11 @@ describe("SiteHeader", () => {
 
     if (menuButton) {
       await menuButton.trigger("click");
-      // @ts-ignore
+      // @ts-expect-error typescript does not infer the type of the component
       expect(wrapper.vm.open.value).toBe(true);
       const firstLink = wrapper.find("li a");
       await firstLink.trigger("click");
-      // @ts-ignore
+      // @ts-expect-error typescript does not infer the type of the component
       expect(wrapper.vm.open.value).toBe(false);
     }
   });

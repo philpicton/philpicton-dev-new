@@ -36,7 +36,7 @@ describe("BackButton", () => {
   it("accepts custom slot content", async () => {
     const wrapper = await mountSuspended(BackButton, {
       slots: {
-        default: () => h('span', 'Return Home'),
+        default: () => h("span", "Return Home"),
       },
     });
 
