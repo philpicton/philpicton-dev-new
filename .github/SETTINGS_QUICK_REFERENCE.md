@@ -50,6 +50,7 @@ Settings → Branches → Add rule
 ✅ Require status checks to pass before merging
    └─ ✅ Require branches to be up to date
    └─ Add these checks:
+      • test (unit tests)
       • quality-checks
       • lint-and-format
       • build
@@ -106,7 +107,7 @@ Wait for workflows to complete in **Actions** tab.
 6. Check: **Require status checks to pass before merging**
    - Check: **Require branches to be up to date**
    - Click **Search for status checks**
-   - Add: `quality-checks`, `lint-and-format`, `build`
+   - Add: `test`, `quality-checks`, `lint-and-format`, `build`
 7. Check: **Do not allow bypassing the above settings**
 8. Uncheck: **Allow force pushes**
 9. Uncheck: **Allow deletions**
@@ -119,12 +120,13 @@ Wait for workflows to complete in **Actions** tab.
 After setup, verify:
 
 - [ ] Push code → Workflows run automatically
-- [ ] Actions tab shows: quality-checks, lint-and-format, build
+- [ ] Actions tab shows: test, quality-checks, lint-and-format, build
 - [ ] Try creating PR → Checks run → "Merge" button disabled until green
 - [ ] Settings → Actions → "Read and write" selected
 - [ ] Settings → Actions → "Allow create and approve" checked
 - [ ] Settings → Branches → Rule exists for "main"
 - [ ] Settings → Branches → Required checks listed
+- [ ] Run `bun run test` locally → All 51 tests pass
 
 ---
 
@@ -218,7 +220,7 @@ Manual review: Always required for everything
 ### When You Push
 
 ```
-✅ Clean code → Checks pass → Deploys automatically
+✅ Clean code → Lint → Tests → Build → Checks pass → Deploys automatically
 ❌ Bad code → Checks fail → Deployment blocked → Fix → Push again
 ```
 
@@ -232,9 +234,9 @@ Manual review: Always required for everything
 ### When Dependabot Creates PR
 
 ```
-✅ Patch/Minor + Checks pass → Auto-approved → Auto-merged → Deployed
+✅ Patch/Minor + All checks pass (lint, tests, build) → Auto-merged → Deployed
 ❌ Major version → Comment added → NOT merged → Manual review required
-❌ Checks fail → Comment added → NOT merged → Fix required
+❌ Any check fails (tests, lint, types) → NOT merged → Fix required
 ```
 
 ---
