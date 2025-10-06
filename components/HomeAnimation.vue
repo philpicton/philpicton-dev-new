@@ -368,8 +368,6 @@ function animate() {
   });
 }
 
-defineExpose({ animate });
-
 // hide all strokes on mounted (so they don't flash)
 onMounted(() => {
   const paths = svgEl.value.querySelectorAll(".stroke");
@@ -382,11 +380,13 @@ onMounted(() => {
   });
   // now we can show the svg
   svgEl.value.style.visibility = "visible";
+  // and animate
+  animate();
 });
 </script>
 
 <style scoped>
-/* Vanilla CSS required for complex GSAP animations and SVG filters that cannot be achieved with Tailwind */
+/* Vanilla CSS required for GSAP animations and SVG filters that cannot be achieved with Tailwind */
 .stage {
   display: flex;
   visibility: hidden;
