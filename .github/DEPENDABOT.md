@@ -18,11 +18,12 @@ This project uses a comprehensive security setup to protect against supply chain
 
 - Patch updates (e.g., 1.0.0 → 1.0.1)
 - Minor updates (e.g., 1.0.0 → 1.1.0)
+- **All 51 unit tests pass**
 
 ❌ **Requires manual review:**
 
 - Major updates (e.g., 1.0.0 → 2.0.0) - potential breaking changes
-- Any update that fails tests or linting
+- Any update that fails tests, linting, or type checking
 
 ## 🔒 Supply Chain Protection
 
@@ -46,6 +47,34 @@ bun run audit:fix
 
 # Check for outdated packages
 bun run outdated
+
+# Run unit tests
+bun run test
+
+# Run all quality checks
+bun run lint && bun run typecheck && bun run test
+```
+
+## 🧪 Test Suite
+
+**Automated Unit Testing** (`.github/workflows/ci.yml`)
+
+- **51 unit tests** across 17 test files
+- Tests all components and pages
+- Runs in all CI/CD workflows
+- Blocks merges and deployments if tests fail
+
+**Test commands:**
+
+```bash
+# Run tests once
+bun run test -- --run
+
+# Run tests in watch mode (development)
+bun run test
+
+# Run specific test file
+bun run test -- BackButton.test.ts
 ```
 
 ### 2. Lock File Protection

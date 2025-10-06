@@ -6,7 +6,7 @@ const { data: about } = await useAsyncData(() =>
 if (!about.value) {
   showError({
     statusCode: 404,
-    statusMessage: "About page content not found.",
+    message: "About page content not found.",
   });
 }
 

@@ -6,7 +6,7 @@ const { data: home } = await useAsyncData("home", () =>
 if (!home.value) {
   showError({
     statusCode: 404,
-    statusMessage:
+    message:
       "Failed to load page content. On the homepage. Doesn't make a very good first impression does it? 😬",
   });
 }

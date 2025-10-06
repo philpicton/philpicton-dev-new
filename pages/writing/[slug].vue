@@ -7,7 +7,7 @@ const { data: post } = await useAsyncData(route.path, () => {
 if (!post.value) {
   showError({
     statusCode: 404,
-    statusMessage: "Blog post not found.",
+    message: "Blog post not found.",
   });
 }
 

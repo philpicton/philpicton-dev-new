@@ -8,7 +8,8 @@ This guide walks you through the exact settings needed to enable branch protecti
 2. [Branch Protection Rules](#branch-protection-rules)
 3. [Actions Permissions](#actions-permissions)
 4. [Dependabot Settings](#dependabot-settings)
-5. [Verification Steps](#verification-steps)
+5. [Test Suite](#test-suite)
+6. [Verification Steps](#verification-steps)
 
 ---
 
@@ -91,6 +92,7 @@ Branch name pattern: main
 
   ```
   quality-checks         # From nuxthub.yml (blocks deployment)
+  test                   # From ci.yml (unit tests - 51 tests)
   lint-and-format       # From ci.yml
   build                 # From ci.yml
   audit                 # From security-audit.yml (optional)
@@ -184,7 +186,7 @@ Click "Create" or "Save changes" at the bottom
 
 ✅ Require status checks to pass
    - Require branches up to date: CHECKED
-   - Required checks: quality-checks, lint-and-format, build, audit
+   - Required checks: test, quality-checks, lint-and-format, build, audit
 
 ✅ Require conversation resolution: CHECKED
 
@@ -272,6 +274,52 @@ The file `.github/dependabot.yml` is already configured:
 
 ---
 
+## 🧪 Test Suite
+
+**Unit Testing with Vitest**
+
+The project includes a comprehensive test suite that runs automatically in all CI/CD workflows:
+
+- **51 unit tests** across 17 test files
+- Tests components and pages
+- Runs on every push, PR, and before deployment
+- **Blocks merges and deployments if tests fail**
+
+### Running Tests Locally
+
+```bash
+# Run all tests once
+bun run test -- --run
+
+# Run tests in watch mode (development)
+bun run test
+
+# Run specific test file
+bun run test -- BackButton.test.ts
+
+# Run tests with coverage (if configured)
+bun run test -- --coverage
+```
+
+### What Gets Tested
+
+- **Components**: All UI components (buttons, forms, navigation, etc.)
+- **Pages**: All route pages and their rendering logic
+- **Data Handling**: Mocked data scenarios
+- **User Interactions**: Click events, form submissions, etc.
+
+### Test Failures
+
+If tests fail in CI/CD:
+
+1. **PR/Push**: Merge blocked, build stopped
+2. **Dependabot**: Auto-merge prevented, manual review required
+3. **Deployment**: Production deployment blocked
+
+Check the Actions tab for detailed error output and fix the failing tests before proceeding.
+
+---
+
 ## 🧪 Verification Steps
 
 ### Step 1: Verify Security Features
@@ -319,6 +367,7 @@ Settings → Branches → Edit rule for main
 → Scroll to "Require status checks to pass before merging"
 → Search for status checks
 → Verify you see:
+   - test
    - quality-checks
    - lint-and-format
    - build
@@ -337,6 +386,7 @@ If you don't see them:
 Settings → Branches → Edit rule for main
 → "Require status checks to pass before merging"
 → Search and add each check:
+   ☑️ test
    ☑️ quality-checks
    ☑️ lint-and-format
    ☑️ build

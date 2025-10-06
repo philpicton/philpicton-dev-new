@@ -19,7 +19,7 @@ const { data: posts } = await useAsyncData("recent-posts", () => {
 if (!posts.value) {
   showError({
     statusCode: 500,
-    statusMessage: "Failed to load posts.",
+    message: "Failed to load posts.",
   });
 }
 

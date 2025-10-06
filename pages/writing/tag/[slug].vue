@@ -18,7 +18,7 @@ const { data: posts } = await useAsyncData(`tag-${tag}`, () => {
 if (!posts.value || posts.value.length === 0) {
   showError({
     statusCode: 404,
-    statusMessage: `No posts found with tag "${tag}".`,
+    message: `No posts found with tag "${tag}".`,
   });
 }
 </script>
