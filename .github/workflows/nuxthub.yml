@@ -102,6 +102,36 @@ jobs:
           echo "::endgroup::"
           echo "✅ Type check passed"
 
+      - name: Run unit tests
+        id: test
+        run: |
+          echo "::group::Running unit tests..."
+          if ! bun run test -- --run; then
+            echo "::endgroup::"
+            echo "::error::❌ Unit tests failed!"
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "❌ DEPLOYMENT BLOCKED: TESTS FAILED"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            echo "⚠️  Deployment cancelled - tests must pass before deploying!"
+            echo ""
+            echo "🔧 To fix locally:"
+            echo "   1. Run: bun run test"
+            echo "   2. Review the failing tests"
+            echo "   3. Fix the issues in your code"
+            echo "   4. Commit and push the fixes"
+            echo ""
+            echo "💡 Tips:"
+            echo "   - Run 'bun run test -- --watch' for development"
+            echo "   - All tests must pass before production deployment"
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            exit 1
+          fi
+          echo "::endgroup::"
+          echo "✅ All tests passed"
+
       - name: Pre-deployment Summary
         if: always()
         run: |
@@ -122,8 +152,13 @@ jobs:
           else
             echo "❌ **Type Check**: Failed - Deployment blocked" >> $GITHUB_STEP_SUMMARY
           fi
+          if [ "${{ steps.test.outcome }}" == "success" ]; then
+            echo "✅ **Unit Tests**: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Unit Tests**: Failed - Deployment blocked" >> $GITHUB_STEP_SUMMARY
+          fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ steps.eslint.outcome }}" == "success" ] && [ "${{ steps.prettier.outcome }}" == "success" ] && [ "${{ steps.typecheck.outcome }}" == "success" ]; then
+          if [ "${{ steps.eslint.outcome }}" == "success" ] && [ "${{ steps.prettier.outcome }}" == "success" ] && [ "${{ steps.typecheck.outcome }}" == "success" ] && [ "${{ steps.test.outcome }}" == "success" ]; then
             echo "✅ **All checks passed!** Proceeding with deployment..." >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ **Deployment blocked!** Fix the issues above before deploying." >> $GITHUB_STEP_SUMMARY

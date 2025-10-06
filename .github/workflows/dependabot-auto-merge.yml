@@ -117,6 +117,42 @@ jobs:
           echo "::endgroup::"
           echo "✅ Type check passed"
 
+      - name: Run unit tests
+        id: test
+        run: |
+          echo "::group::Running unit tests..."
+          if ! bun run test -- --run; then
+            echo "::endgroup::"
+            echo "::error::❌ Dependabot PR failed unit tests"
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "❌ DEPENDABOT AUTO-MERGE BLOCKED: TESTS FAILED"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            echo "This dependency update broke existing functionality."
+            echo ""
+            echo "⚠️  This PR will NOT be auto-merged and requires investigation."
+            echo ""
+            echo "🔍 Possible issues:"
+            echo "   - Breaking changes in the dependency"
+            echo "   - Changed API or behavior"
+            echo "   - Incompatible versions"
+            echo ""
+            echo "🔧 To investigate:"
+            echo "   1. Check the dependency's changelog/release notes"
+            echo "   2. Check out this PR branch locally"
+            echo "   3. Run: bun run test"
+            echo "   4. Review the failing tests"
+            echo "   5. Update code or tests as needed"
+            echo ""
+            echo "💡 The tests are catching potential bugs - investigate carefully!"
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            exit 1
+          fi
+          echo "::endgroup::"
+          echo "✅ All tests passed"
+
       - name: Build project
         id: build
         run: |
@@ -183,6 +219,13 @@ jobs:
             echo "   - Run \`bun run typecheck\` to see errors" >> $GITHUB_STEP_SUMMARY
           fi
           
+          if [ "${{ steps.test.outcome }}" == "success" ]; then
+            echo "✅ **Unit Tests**: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Unit Tests**: Failed - Auto-merge blocked" >> $GITHUB_STEP_SUMMARY
+            echo "   - Run \`bun run test\` to see failures" >> $GITHUB_STEP_SUMMARY
+          fi
+          
           if [ "${{ steps.build.outcome }}" == "success" ]; then
             echo "✅ **Build**: Passed" >> $GITHUB_STEP_SUMMARY
           else
@@ -192,7 +235,7 @@ jobs:
           
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          if [ "${{ steps.lint.outcome }}" == "success" ] && [ "${{ steps.format.outcome }}" == "success" ] && [ "${{ steps.typecheck.outcome }}" == "success" ] && [ "${{ steps.build.outcome }}" == "success" ]; then
+          if [ "${{ steps.lint.outcome }}" == "success" ] && [ "${{ steps.format.outcome }}" == "success" ] && [ "${{ steps.typecheck.outcome }}" == "success" ] && [ "${{ steps.test.outcome }}" == "success" ] && [ "${{ steps.build.outcome }}" == "success" ]; then
             echo "🎉 **All checks passed!** This PR will be auto-merged." >> $GITHUB_STEP_SUMMARY
           else
             echo "⚠️ **Auto-merge blocked** - Fix the issues above and push to this branch." >> $GITHUB_STEP_SUMMARY
