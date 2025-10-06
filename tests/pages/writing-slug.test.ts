@@ -27,7 +27,7 @@ describe('Writing Slug Page', () => {
       global: {
         stubs: {
           ContentRenderer: {
-            template: '<div class="content-renderer-stub"><slot /></div>',
+            template: '<div class="content-renderer-stub" data-testid="content-renderer"><slot /></div>',
           },
         },
       },
@@ -44,7 +44,7 @@ describe('Writing Slug Page', () => {
       global: {
         stubs: {
           ContentRenderer: {
-            template: '<div class="content-renderer-stub"><slot /></div>',
+            template: '<div class="content-renderer-stub" data-testid="content-renderer"><slot /></div>',
           },
         },
       },
@@ -59,13 +59,13 @@ describe('Writing Slug Page', () => {
       global: {
         stubs: {
           ContentRenderer: {
-            template: '<div class="content-renderer-stub"><slot /></div>',
+            template: '<div class="content-renderer-stub" data-testid="content-renderer"><slot /></div>',
           },
         },
       },
     })
     
-    // Check if article exists which contains the ContentRenderer
-    expect(wrapper.find('article').exists()).toBe(true)
+    // Check if ContentRenderer stub is present
+    expect(wrapper.find('[data-testid="content-renderer"]').exists()).toBe(true)
   })
 })
