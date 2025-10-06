@@ -21,6 +21,18 @@ export type BlogPostList = {
   path: string;
 }[];
 
+export interface ProjectItem {
+  title: string;
+  description: string;
+  thumbnail: string;
+  tech: string[];
+  date: string;
+  path: string;
+  slug: string;
+}
+
+export type ProjectList = ProjectItem[];
+
 export interface MailApiResponse {
   success: boolean;
   error?: string;

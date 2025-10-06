@@ -17,7 +17,8 @@ function goBack() {
 <template>
   <button
     type="button"
-    class="hover:text-green-700 dark:hover:text-green-600"
+    class="hover:text-green-700 dark:hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 rounded transition-all"
+    aria-label="Go back"
     @click="goBack"
   >
     <svg

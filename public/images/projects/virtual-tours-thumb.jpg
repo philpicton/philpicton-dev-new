@@ -1,0 +1,8 @@
+<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="600" fill="#3b82f6"/>
+  <circle cx="300" cy="240" r="80" fill="#60a5fa" opacity="0.5"/>
+  <circle cx="200" cy="360" r="60" fill="#93c5fd" opacity="0.5"/>
+  <circle cx="400" cy="360" r="60" fill="#93c5fd" opacity="0.5"/>
+  <text x="300" y="450" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">Virtual Tours</text>
+  <text x="300" y="490" font-family="Arial, sans-serif" font-size="18" fill="#e0e0e0" text-anchor="middle">360° Experience</text>
+</svg>

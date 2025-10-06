@@ -15,7 +15,7 @@ const ariaLabel = computed(() =>
 <template>
   <button
     :aria-label="ariaLabel"
-    class="w-5 h-5 hover:text-green-600 transition flex flex-col justify-center"
+    class="w-5 h-5 hover:text-green-600 transition flex flex-col justify-center focus:outline-none focus:ring-2 focus:ring-green-500 rounded"
     @click="onClick"
   >
     <ColorScheme placeholder="...">
