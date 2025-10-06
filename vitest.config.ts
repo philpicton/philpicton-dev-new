@@ -7,7 +7,11 @@ export default defineVitestConfig({
       nuxt: {
         rootDir: fileURLToPath(new URL('./', import.meta.url)),
         overrides: {
-          // Override config to avoid loading issues
+          // Disable hub module during tests to avoid database initialization issues
+          hub: {
+            database: false,
+            kv: false,
+          },
         },
       },
     },
