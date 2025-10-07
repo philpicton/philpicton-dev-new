@@ -2,6 +2,7 @@
 import { describe, it, expect } from "vitest";
 import { mountSuspended } from "@nuxt/test-utils/runtime";
 import ProjectCard from "~/components/ProjectCard.vue";
+import type { ProjectItem } from "~/types/types";
 
 describe("ProjectCard", () => {
   const mockProject = {
@@ -13,7 +14,7 @@ describe("ProjectCard", () => {
     date: "2024-01-15",
     path: "/projects/test-project",
     slug: "test-project",
-  };
+  } as ProjectItem;
 
   it("renders project card with correct structure", async () => {
     const wrapper = await mountSuspended(ProjectCard, {
@@ -111,8 +112,15 @@ describe("ProjectCard", () => {
   it("handles projects with many technologies", async () => {
     const projectWithManyTech = {
       ...mockProject,
-      tech: ["Vue.js", "TypeScript", "Tailwind", "Node.js", "PostgreSQL", "Docker"],
-    };
+      tech: [
+        "Vue.js",
+        "TypeScript",
+        "Tailwind",
+        "Node.js",
+        "PostgreSQL",
+        "Docker",
+      ],
+    } as ProjectItem;
 
     const wrapper = await mountSuspended(ProjectCard, {
       props: { project: projectWithManyTech },
@@ -126,7 +134,7 @@ describe("ProjectCard", () => {
     const projectWithNoTech = {
       ...mockProject,
       tech: [],
-    };
+    } as ProjectItem;
 
     const wrapper = await mountSuspended(ProjectCard, {
       props: { project: projectWithNoTech },
@@ -141,7 +149,7 @@ describe("ProjectCard", () => {
       ...mockProject,
       description:
         "This is a very long description that should be truncated by the line-clamp-3 utility class. It goes on and on with lots of text that would take up too much space on the card if it were all shown.",
-    };
+    } as ProjectItem;
 
     const wrapper = await mountSuspended(ProjectCard, {
       props: { project: projectWithLongDesc },

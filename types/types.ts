@@ -1,4 +1,7 @@
-import type { BlogPostCollectionItem } from "@nuxt/content";
+import type {
+  BlogPostCollectionItem,
+  ProjectCollectionItem,
+} from "@nuxt/content";
 
 export interface Article {
   title: string;
@@ -21,7 +24,7 @@ export type BlogPostList = {
   path: string;
 }[];
 
-export interface ProjectItem {
+export interface ProjectItem extends ProjectCollectionItem {
   title: string;
   description: string;
   thumbnail: string;

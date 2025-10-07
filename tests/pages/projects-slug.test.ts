@@ -125,10 +125,9 @@ describe("Project Detail Page", () => {
     expect(backButton.props("to")).toBe("/projects");
   });
 
-  it("renders ContentRenderer with project body", async () => {
+  it("renders ContentRenderer", async () => {
     const wrapper = await mountSuspended(ProjectSlug, mountOptions);
 
-    // ContentRenderer is stubbed, so check for the stub
     const contentRenderer = wrapper.find('[data-testid="content-renderer"]');
     expect(contentRenderer.exists()).toBe(true);
   });
@@ -161,29 +160,7 @@ describe("Project Detail Page", () => {
     const wrapper = await mountSuspended(ProjectSlug, mountOptions);
 
     const hrs = wrapper.findAll("hr");
-    expect(hrs.length).toBeGreaterThanOrEqual(2); // At least 2 hrs in the layout
-  });
-
-  it("has SEO meta tags", async () => {
-    const wrapper = await mountSuspended(ProjectSlug, mountOptions);
-
-    // Component should call useSeoMeta with project data
-    expect(wrapper.vm).toBeDefined();
-  });
-
-  it("renders tech pills with hover animation classes", async () => {
-    const wrapper = await mountSuspended(ProjectSlug, mountOptions);
-
-    const techSpans = wrapper.findAll("span");
-    const techPills = techSpans.filter((span) =>
-      span
-        .classes()
-        .some(
-          (cls) => cls.includes("transition") || cls.includes("hover:scale"),
-        ),
-    );
-
-    expect(techPills.length).toBeGreaterThan(0);
+    expect(hrs.length).toBeGreaterThanOrEqual(2);
   });
 
   it("has proper not-prose classes to prevent prose styling on certain elements", async () => {

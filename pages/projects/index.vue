@@ -18,7 +18,15 @@ const searchTech = ref<string>((route.query.tech as string) || "");
 const { data: allProjects } = await useAsyncData("all-projects", () => {
   return queryCollection("project")
     .order("date", "DESC")
-    .select("title", "path", "description", "tech", "thumbnail", "heroImage", "date")
+    .select(
+      "title",
+      "path",
+      "description",
+      "tech",
+      "thumbnail",
+      "heroImage",
+      "date",
+    )
     .all();
 });
 

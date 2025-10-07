@@ -47,7 +47,7 @@ mockNuxtImport("navigateTo", () => () => {});
 
 // Mock useAsyncData to return our mock projects
 mockNuxtImport("useAsyncData", () => {
-  return (key: string) => ({
+  return () => ({
     data: ref(mockProjects),
     pending: ref(false),
     error: ref(null),
@@ -141,7 +141,7 @@ describe("Projects Index Page", () => {
 
     const cards = wrapper.findAllComponents({ name: "ProjectCard" });
     expect(cards.length).toBeGreaterThan(0);
-    
+
     // Verify the first card receives heroImage prop
     const firstCard = cards[0];
     expect(firstCard.props("project")).toBeDefined();
