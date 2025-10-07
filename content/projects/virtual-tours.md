@@ -1,31 +1,34 @@
 ---
-title: "Virtual Tours Platform"
-description: "An immersive 360° virtual tour platform built with modern web technologies"
-thumbnail: "/images/projects/virtual-tours-thumb.jpg"
-tech: ["Vue.js", "Three.js", "Node.js", "MongoDB", "WebGL"]
-date: "2024-01-15"
+title: "Immersive virtual tour"
+description: "Responsive UIs embedded in VR environments"
+thumbnail: "/images/projects/d.jpg"
+heroImage: "/images/projects/virtual-tours-hero.jpg"
+tech: ["KRPano", "PHP", "JS", "Websockets"]
+date: "2021-03-15"
 ---
 
 ## Overview
 
-This project is a cutting-edge virtual tours platform that allows users to create and experience immersive 360° tours of properties, museums, and other locations.
+I worked with an industry-leading Virtual Tour Company to create immersive virtual tours of various locations. This project was a tour of a University campus, for prospective students to explore.
 
 ## Key Features
 
-- **360° Panoramic Views**: Seamless navigation through high-resolution panoramic images
-- **Interactive Hotspots**: Clickable elements that provide additional information
-- **Multi-floor Navigation**: Easy transition between different levels and rooms
-- **VR Support**: Compatible with VR headsets for fully immersive experiences
-- **Custom Branding**: White-label solution for businesses
+- Custom designed interface, using the Uni's branding.
+- Menu driven navigation as well as navigation buttons embedded in the tour
+- Accessibility menu
+- Keyboard navigation
+- Proprietary CMS integration - all content editable by client
+- Video presentation and chat embeds
 
-## Technical Implementation
+## Stack
 
-Built using Vue.js for the frontend framework with Three.js powering the 3D rendering engine. The backend API is powered by Node.js and uses MongoDB for data persistence.
+- Integrated with the company's custom CMS built in PHP/Laravel
+- Panoramas rendered using KRPano
+- Vanilla JS to provide UI reactivity and tour navigation
+- CSS styling
+- Websockets for Chat embeds
+- Native video embeds using alpha channels to remove greenscreen
 
-## Challenges & Solutions
+## Business Impact
 
-One of the main challenges was optimizing performance for large panoramic images while maintaining visual quality. This was solved through progressive loading and dynamic resolution switching based on viewport.
-
-## Results
-
-The platform successfully reduced property viewing times by 60% and increased buyer engagement significantly.
+At the time of this project, many Universities were implementing virtual tours due to Covid lockdowns. Being able to offer advanced features such as accessibility and a full fledged CMS gave the company a huge competitive advantage, and ultimately lead to winning further large projects for international brands.

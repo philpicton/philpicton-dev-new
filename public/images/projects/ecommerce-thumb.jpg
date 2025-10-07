@@ -1,8 +1,0 @@
-<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="600" height="600" fill="#10b981"/>
-  <rect x="150" y="180" width="300" height="180" rx="10" fill="#34d399" opacity="0.5"/>
-  <circle cx="250" cy="450" r="30" fill="#6ee7b7" opacity="0.7"/>
-  <circle cx="350" cy="450" r="30" fill="#6ee7b7" opacity="0.7"/>
-  <text x="300" y="520" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">E-Commerce</text>
-  <text x="300" y="560" font-family="Arial, sans-serif" font-size="18" fill="#e0e0e0" text-anchor="middle">Shop & Buy</text>
-</svg>
