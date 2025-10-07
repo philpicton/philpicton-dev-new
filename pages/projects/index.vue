@@ -18,7 +18,7 @@ const searchTech = ref<string>((route.query.tech as string) || "");
 const { data: allProjects } = await useAsyncData("all-projects", () => {
   return queryCollection("project")
     .order("date", "DESC")
-    .select("title", "path", "description", "tech", "thumbnail", "date")
+    .select("title", "path", "description", "tech", "thumbnail", "heroImage", "date")
     .all();
 });
 
@@ -97,7 +97,11 @@ function clearFilter() {
     <div class="mb-6">
       <h1>Projects</h1>
       <p class="text-slate-600 dark:text-slate-300">
-        A showcase of my recent work and side projects
+        A selection of project highlights.<br />
+        <small>
+          NB. I'm being careful not to share too much due to confidentiality and
+          non-disclosure agreements.
+        </small>
       </p>
     </div>
     <hr />

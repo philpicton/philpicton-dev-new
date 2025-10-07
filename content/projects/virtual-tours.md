@@ -1,7 +1,7 @@
 ---
 title: "Immersive virtual tour"
 description: "Responsive UIs embedded in VR environments"
-thumbnail: "/images/projects/d.jpg"
+thumbnail: "/images/projects/virtual-tours-thumb.jpg"
 heroImage: "/images/projects/virtual-tours-hero.jpg"
 tech: ["KRPano", "PHP", "JS", "Websockets"]
 date: "2021-03-15"
@@ -18,12 +18,12 @@ I worked with an industry-leading Virtual Tour Company to create immersive virtu
 - Accessibility menu
 - Keyboard navigation
 - Proprietary CMS integration - all content editable by client
-- Video presentation and chat embeds
+- Video presentation and chat embeds via CMS
 
 ## Stack
 
 - Integrated with the company's custom CMS built in PHP/Laravel
-- Panoramas rendered using KRPano
+- Panoramas rendered using [KRPano](https://krpano.com/home/)
 - Vanilla JS to provide UI reactivity and tour navigation
 - CSS styling
 - Websockets for Chat embeds

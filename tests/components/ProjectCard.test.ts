@@ -8,6 +8,7 @@ describe("ProjectCard", () => {
     title: "Test Project",
     description: "A test project description that is quite detailed",
     thumbnail: "/images/projects/test-thumb.jpg",
+    heroImage: "/images/projects/test-hero.jpg",
     tech: ["Vue.js", "TypeScript", "Tailwind CSS"],
     date: "2024-01-15",
     path: "/projects/test-project",

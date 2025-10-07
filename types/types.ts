@@ -25,6 +25,7 @@ export interface ProjectItem {
   title: string;
   description: string;
   thumbnail: string;
+  heroImage?: string;
   tech: string[];
   date: string;
   path: string;
