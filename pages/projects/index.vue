@@ -108,7 +108,8 @@ function clearFilter() {
         A selection of project highlights.<br />
         <small>
           NB. I'm being careful not to share too much due to confidentiality and
-          non-disclosure agreements.
+          non-disclosure agreements, and out of gratitude and respect for the
+          clients.
         </small>
       </p>
     </div>

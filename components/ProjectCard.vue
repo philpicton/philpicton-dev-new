@@ -55,14 +55,6 @@ const isHovered = ref(false);
         </span>
       </div>
     </div>
-
-    <!-- Animated arrow indicator -->
-    <div
-      class="absolute top-4 right-4 w-8 h-8 rounded-full bg-green-600 dark:bg-green-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-      :class="isHovered ? 'translate-x-0' : 'translate-x-2'"
-    >
-      <Icon name="formkit:arrowright" class="text-white" size="18" />
-    </div>
   </NuxtLink>
 </template>
 
