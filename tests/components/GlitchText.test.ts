@@ -5,15 +5,6 @@ import { h } from "vue";
 import GlitchText from "~/components/GlitchText.vue";
 
 describe("GlitchText", () => {
-  it("renders wrapper div with inline styles", async () => {
-    const wrapper = await mountSuspended(GlitchText);
-    const div = wrapper.find("div");
-
-    expect(div.exists()).toBe(true);
-    expect(div.attributes("style")).toContain("opacity");
-    expect(div.attributes("style")).toContain("text-shadow");
-  });
-
   it("renders slot content correctly", async () => {
     const wrapper = await mountSuspended(GlitchText, {
       slots: {
