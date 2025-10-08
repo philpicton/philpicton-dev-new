@@ -105,11 +105,11 @@ function clearFilter() {
     <div class="mb-6">
       <h1>Projects</h1>
       <p class="text-slate-600 dark:text-slate-300">
-        A selection of project highlights.<br />
+        A selection of my project highlights.<br />
         <small>
           NB. I'm being careful not to share too much due to confidentiality and
           non-disclosure agreements, and out of gratitude and respect for the
-          clients.
+          clients & employers.
         </small>
       </p>
     </div>
