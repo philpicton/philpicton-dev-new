@@ -23,8 +23,6 @@ logs
 .env.*
 !.env.example
 
-./DS-Store
-
 # Test outputs
 coverage
 .vitest
