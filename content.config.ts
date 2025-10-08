@@ -26,7 +26,7 @@ export default defineContentConfig({
         heroImage: z.string().optional(),
         thumbnail: z.string(),
         tech: z.array(z.string()),
-        date: z.date(),
+        date: z.string(),
       }),
     }),
   },

@@ -40,15 +40,7 @@ useSeoMeta({
         </div>
 
         <small class="text-slate-500 dark:text-slate-400">
-          {{
-            project.date
-              ? new Date(project.date).toLocaleDateString("en-GB", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-              : ""
-          }}
+          {{ project.date }}
         </small>
       </div>
 

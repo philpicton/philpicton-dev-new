@@ -4,7 +4,7 @@ description: "AWS Lambda functions to handle high concurrency web traffic"
 thumbnail: "/images/projects/queue-thumb.jpg"
 heroImage: "/images/projects/queue-hero.jpg"
 tech: ["AWS Lambda", "Node.js", "Redis", "Docker", "CI/CD"]
-date: "2022-06-24"
+date: "2022/2023"
 ---
 
 ## Overview

@@ -4,7 +4,7 @@ description: "Responsive UIs embedded in VR environments"
 thumbnail: "/images/projects/virtual-tours-thumb.jpg"
 heroImage: "/images/projects/virtual-tours-hero.jpg"
 tech: ["KRPano", "PHP", "JS", "Websockets"]
-date: "2021-03-15"
+date: "2020/2021"
 ---
 
 ## Overview

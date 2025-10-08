@@ -100,12 +100,11 @@ describe("Project Detail Page", () => {
     expect(wrapper.text()).toContain("WebGL");
   });
 
-  it("displays formatted date", async () => {
+  it("displays date as string", async () => {
     const wrapper = await mountSuspended(ProjectSlug, mountOptions);
 
-    // Date should be formatted as "15 January 2024" or similar
-    expect(wrapper.text()).toMatch(/January/);
-    expect(wrapper.text()).toMatch(/2024/);
+    // Date should be displayed as-is from the content
+    expect(wrapper.text()).toContain("2024-01-15");
   });
 
   it("renders thumbnail image", async () => {
@@ -170,11 +169,11 @@ describe("Project Detail Page", () => {
     expect(notProseElements.length).toBeGreaterThan(0);
   });
 
-  it("displays project date with proper formatting", async () => {
+  it("displays project date as string", async () => {
     const wrapper = await mountSuspended(ProjectSlug, mountOptions);
 
     const dateElement = wrapper.find("small");
     expect(dateElement.exists()).toBe(true);
-    expect(dateElement.text()).toMatch(/\d{1,2}\s+\w+\s+\d{4}/); // Match date pattern
+    expect(dateElement.text()).toBe("2024-01-15");
   });
 });

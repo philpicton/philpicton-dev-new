@@ -4,7 +4,7 @@ description: "Tackling tech debt with an ambitious project to generate pages fro
 thumbnail: "/images/projects/bge-thumb.jpg"
 heroImage: "/images/projects/bge-hero.jpg"
 tech: [""]
-date: "2025-01-01"
+date: "2025"
 ---
 
 ## Overview
