@@ -2,7 +2,7 @@
 interface ErrorProps {
   error?: {
     statusCode?: number;
-    statusMessage?: string;
+    message?: string;
   };
 }
 
@@ -23,7 +23,7 @@ useSeoMeta({
         </h1>
       </GlitchText>
       <p class="mb-6">
-        {{ error?.statusMessage || "An unspecified error occurred." }}
+        {{ error?.message || "An unspecified error occurred." }}
       </p>
       <NuxtLink to="/">Home</NuxtLink>
     </main>
