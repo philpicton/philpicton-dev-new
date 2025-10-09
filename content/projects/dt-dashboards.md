@@ -3,7 +3,7 @@ title: "Data visualisation dashboards"
 description: "Various reporting and data dashboards for a client facing backoffice"
 thumbnail: "/images/projects/dt-dashboards-thumb.jpg"
 heroImage: "/images/projects/dt-dashboards-hero.jpg"
-tech: ["Vue", "Pinia", "Typescript", "REST"]
+tech: ["Vue", "Pinia", "Typescript", "REST", "Vitest"]
 date: "2024"
 ---
 

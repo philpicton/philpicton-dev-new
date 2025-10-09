@@ -1,5 +1,5 @@
 ---
-title: "3d VR CMS and tours"
+title: "3D panorama CMS and tours"
 description: "A CMS to manage interactive archtectural renders"
 thumbnail: "/images/projects/3d-arch-thumb.jpg"
 heroImage: "/images/projects/3d-arch-hero.jpg"
