@@ -23,10 +23,13 @@ logs
 .env.*
 !.env.example
 
-./DS-Store
-
 # Test outputs
 coverage
 .vitest
 playwright/.cache
+
+# Not committing ai experiments (yet)
+WARP.md
+.github/promps
+.specify
 

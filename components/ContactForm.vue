@@ -213,7 +213,7 @@ const handleSubmit = async () => {
       <div class="w-full text-center">
         <button
           :disabled="isError || loading"
-          class="text-white bg-green-700 w-[50%] py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 hover:shadow-xl hover:opacity-75 ease-in-out duration-300 flex flex-row items-center justify-center mx-auto mt-5 disabled:opacity-40 disabled:cursor-not-allowed"
+          class="text-white bg-green-700 w-[50%] py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 hover:shadow-xl hover:opacity-75 ease-in-out duration-300 flex flex-row items-center justify-center mx-auto mt-5 disabled:opacity-40 disabled:cursor-not-allowed disabled:focus:ring-0"
           @click.stop.prevent="handleSubmit"
         >
           <svg
@@ -242,7 +242,10 @@ const handleSubmit = async () => {
         class="flex flex-col items-center px-5 py-1 mt-5"
       >
         <p>{{ resultMessage }}</p>
-        <nuxt-link to="/" tag="a" class="text-green-700 underline"
+        <nuxt-link
+          to="/"
+          tag="a"
+          class="text-green-700 underline focus:outline-none focus:ring-2 focus:ring-green-500 rounded"
           >Home</nuxt-link
         >
       </div>

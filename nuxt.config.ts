@@ -8,10 +8,13 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
   vite: {
     plugins: [tailwindcss()],
+    css: {
+      devSourcemap: true, // Enable sourcemaps in development
+    },
   },
   modules: [
-    "@nuxthub/core",
     "@nuxt/content",
+    "@nuxthub/core",
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/icon",

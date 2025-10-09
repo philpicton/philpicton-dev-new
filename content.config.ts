@@ -17,5 +17,17 @@ export default defineContentConfig({
         date: z.date(),
       }),
     }),
+    project: defineCollection({
+      type: "page",
+      source: "projects/*.md",
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        heroImage: z.string().optional(),
+        thumbnail: z.string(),
+        tech: z.array(z.string()),
+        date: z.string(),
+      }),
+    }),
   },
 });

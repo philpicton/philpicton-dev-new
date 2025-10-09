@@ -65,7 +65,8 @@ function goToPage(page: number) {
     <div class="flex justify-center gap-2 mt-6">
       <button
         :disabled="currentPage === 1"
-        class="px-2 py-1 border rounded disabled:opacity-50 flex items-center justify-center"
+        class="w-10 h-10 border rounded disabled:opacity-50 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-green-500 disabled:focus:ring-0 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+        :aria-label="`Go to previous page, page ${currentPage - 1}`"
         @click="goToPage(currentPage - 1)"
       >
         <Icon name="formkit:stepback" size="24" class="block" />
@@ -74,8 +75,9 @@ function goToPage(page: number) {
         v-for="page in totalPages"
         :key="page"
         :aria-current="page === currentPage ? 'page' : undefined"
+        :aria-label="`${page === currentPage ? 'Current page' : 'Go to'} page ${page}`"
         :class="[
-          'px-3 py-1 border rounded ',
+          'w-10 h-10 border rounded flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700',
           page === currentPage ? 'text-green-600' : '',
         ]"
         @click="goToPage(page)"
@@ -85,7 +87,8 @@ function goToPage(page: number) {
 
       <button
         :disabled="currentPage === totalPages"
-        class="px-2 py-1 border rounded disabled:opacity-50 flex items-center justify-center"
+        class="w-10 h-10 border rounded disabled:opacity-50 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-green-500 disabled:focus:ring-0 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+        :aria-label="`Go to next page, page ${currentPage + 1}`"
         @click="goToPage(currentPage + 1)"
       >
         <Icon name="formkit:stepforward" size="24" />

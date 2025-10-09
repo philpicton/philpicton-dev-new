@@ -84,6 +84,9 @@ Visit `http://localhost:3000`
 Create a `.env` file with the following:
 
 ```env
+# NuxtHub Configuration
+NUXT_HUB_PROJECT_KEY=your_nuxthub_project_key
+
 # Email Configuration (Resend)
 RESEND_API_KEY=your_resend_api_key
 MAIL_FROM=noreply@yourdomain.com

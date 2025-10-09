@@ -1,5 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /projects/
+Disallow: /projects
 
 # Block known AI bots
 User-agent: GPTBot
